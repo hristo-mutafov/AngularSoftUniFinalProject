@@ -13,6 +13,11 @@ export const routes: Routes = [
         component: HomeComponent,
     },
     {
+        path: 'auth',
+        loadChildren: () =>
+            import('./pages/auth/auth.routes').then((r) => r.routes),
+    },
+    {
         path: 'not-found',
         component: NotFoundComponent,
     },
