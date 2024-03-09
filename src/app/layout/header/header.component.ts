@@ -9,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
     // TODO: Implement mobile header functionality
+    // TODO: Try to split the html to a smaller chunks
 }
