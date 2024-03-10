@@ -28,6 +28,11 @@ export const routes: Routes = [
             import('./pages/cart/cart.routes').then((r) => r.routes),
     },
     {
+        path: 'order',
+        loadChildren: () =>
+            import('./pages/order/order.routes').then((r) => r.routes),
+    },
+    {
         path: 'not-found',
         component: NotFoundComponent,
     },
