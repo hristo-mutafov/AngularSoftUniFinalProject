@@ -23,6 +23,11 @@ export const routes: Routes = [
             import('./pages/profile/profile.routes').then((r) => r.routes),
     },
     {
+        path: 'cart',
+        loadChildren: () =>
+            import('./pages/cart/cart.routes').then((r) => r.routes),
+    },
+    {
         path: 'not-found',
         component: NotFoundComponent,
     },
