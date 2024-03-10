@@ -18,6 +18,11 @@ export const routes: Routes = [
             import('./pages/auth/auth.routes').then((r) => r.routes),
     },
     {
+        path: 'product',
+        loadChildren: () =>
+            import('./pages/product/product.routes').then((r) => r.routes),
+    },
+    {
         path: 'profile',
         loadChildren: () =>
             import('./pages/profile/profile.routes').then((r) => r.routes),
