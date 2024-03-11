@@ -32,6 +32,9 @@
                     ngModel
                     required
                 />
+                @if (error()) {
+                    <p id="error_messages">{{ error() }}</p>
+                }
                 <button
                     id="login_btn"
                     class="authentication_btn"
