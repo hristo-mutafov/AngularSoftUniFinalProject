@@ -3,7 +3,6 @@
         <div class="authentication_wrapper">
             <h1>Register</h1>
             <form #form="ngForm" class="form" (ngSubmit)="register(form)">
-                <p id="error_messages"></p>
                 <label for="email_field">Email</label>
 
                 <div>
@@ -67,6 +66,9 @@
                         [appEqualPassword]="passwordField.value"
                     />
                 </div>
+                @if (error()) {
+                    <p id="error_messages">{{ error() }}</p>
+                }
                 <button
                     [disabled]="form.invalid"
                     id="register_btn"
