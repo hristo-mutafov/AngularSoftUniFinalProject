@@ -24,6 +24,17 @@
     font-size: 20px;
 }
 
+.authentication .form .error {
+    color: red;
+    font-size: 14px;
+    align-self: start;
+    margin-bottom: 4px;
+}
+
+.authentication .form input {
+    padding: 4px 6px;
+}
+
 .authentication h1 {
     text-align: center;
     font-size: 36px;
