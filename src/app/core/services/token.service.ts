@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { AuthStateService } from '../state/auth-state.service';
 import { IAuthResponse } from '../../types';
 
@@ -18,10 +19,12 @@ export class TokenService {
         return localStorage.getItem(this.TOKEN_NAME);
     }
 
-    manageTokens({ access_token, refresh_token }: IAuthResponse) {
+    manageTokens = ({ access_token, refresh_token }: IAuthResponse) => {
+        console.log(this.authState);
+
         this.authState.authenticate(access_token);
         this.uploadTokens(access_token, refresh_token);
-    }
+    };
 
     private uploadTokens(accessToken: string, refreshToken?: string) {
         this.uploadAccessToken(accessToken);
