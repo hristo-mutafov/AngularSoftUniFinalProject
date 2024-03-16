@@ -1,3 +1,7 @@
-<app-header />
-<router-outlet />
-<app-footer />
+@if (loading) {
+    <h1>LOADING...</h1>
+} @else {
+    <app-header />
+    <router-outlet />
+    <app-footer />
+}
