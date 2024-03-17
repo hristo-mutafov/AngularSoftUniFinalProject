@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 
+import { IAuthResponse, IRefreshTokenResponse } from '../../types';
 import { AuthStateService } from '../state/auth-state.service';
-import { IAuthResponse } from '../../types';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TokenService {
     private TOKEN_NAME = 'session';
-
-    constructor(private authState: AuthStateService) {}
+    private _refreshState = false;
 
     get accessToken() {
         return sessionStorage.getItem(this.TOKEN_NAME);
@@ -19,18 +18,37 @@ export class TokenService {
         return localStorage.getItem(this.TOKEN_NAME);
     }
 
-    manageTokens = ({ access_token, refresh_token }: IAuthResponse) => {
-        console.log(this.authState);
+    get refreshState() {
+        return this._refreshState;
+    }
 
-        this.authState.authenticate(access_token);
+    set setRefreshState(state: boolean) {
+        this._refreshState = state;
+    }
+
+    constructor(private authState: AuthStateService) {}
+
+    authHandler = ({
+        access_token,
+        refresh_token,
+        is_staff,
+    }: IAuthResponse) => {
+        this.authState.setIsStaff(is_staff);
         this.uploadTokens(access_token, refresh_token);
     };
 
-    private uploadTokens(accessToken: string, refreshToken?: string) {
+    refreshHandler = ({ access }: IRefreshTokenResponse) => {
+        this.uploadAccessToken(access);
+    };
+
+    removeTokens() {
+        sessionStorage.removeItem(this.TOKEN_NAME);
+        localStorage.removeItem(this.TOKEN_NAME);
+    }
+
+    private uploadTokens(accessToken: string, refreshToken: string) {
         this.uploadAccessToken(accessToken);
-        if (refreshToken) {
-            this.uploadLocalStorage(refreshToken);
-        }
+        this.uploadLocalStorage(refreshToken);
     }
 
     private uploadLocalStorage(refreshToken: string) {
