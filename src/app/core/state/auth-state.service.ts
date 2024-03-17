@@ -10,7 +10,7 @@ export class AuthStateService implements OnDestroy {
     private authSubject$$ = new BehaviorSubject<IProfileState | null>(null);
     auth$ = this.authSubject$$.asObservable();
 
-    _authenticated = false;
+    private _authenticated = false;
     private subscription: Subscription;
 
     constructor() {
@@ -27,6 +27,10 @@ export class AuthStateService implements OnDestroy {
         );
     }
 
+    isAuthenticated() {
+        return this._authenticated;
+    }
+
     setProfile(profile: IProfile) {
         this.authSubject$$.next({
             email: profile.email,
@@ -41,6 +45,10 @@ export class AuthStateService implements OnDestroy {
 
     setIsStaff(isStaff: boolean) {
         this.authSubject$$.next({ isStaff });
+    }
+
+    isStaff() {
+        return;
     }
 
     authenticate() {

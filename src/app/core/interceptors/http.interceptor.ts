@@ -20,7 +20,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
             url: req.url.replace('/api', BASE_URL) + '/',
         });
 
-        if (authState._authenticated) {
+        if (authState.isAuthenticated()) {
             if (checkToken(tokenService) && !tokenService.refreshState) {
                 tokenService.setRefreshState = true;
                 return http.getAccessToken(tokenService.refreshToken!).pipe(
