@@ -11,10 +11,12 @@ export class AuthStateService implements OnDestroy {
     auth$ = this.authSubject$$.asObservable();
 
     private _authenticated = false;
+    private _isStaff: boolean | undefined;
     private subscription: Subscription;
 
     constructor() {
         this.subscription = this.auth$.subscribe((auth) => {
+            this._isStaff = auth?.isStaff;
             this._authenticated = !!auth;
         });
     }
@@ -48,7 +50,9 @@ export class AuthStateService implements OnDestroy {
     }
 
     isStaff() {
-        return;
+        console.log(this._isStaff);
+
+        return this._isStaff;
     }
 
     authenticate() {
