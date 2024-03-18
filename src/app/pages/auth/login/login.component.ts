@@ -8,6 +8,7 @@ import {
     AUTHENTICATION_400,
     AUTHENTICATION_500,
 } from '../../../shared/constants';
+import { AuthStateService } from '../../../core/state/auth-state.service';
 
 @Component({
     selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent {
     constructor(
         private api: HttpService,
         private router: Router,
+        private authState: AuthStateService,
     ) {}
 
     login(form: NgForm) {
@@ -29,7 +31,12 @@ export class LoginComponent {
 
         const { email, password } = form.value;
         this.api.login(email, password).subscribe({
-            next: () => this.router.navigate(['home']),
+            next: () => {
+                this.api.getProfile().subscribe((profile) => {
+                    this.authState.setProfile(profile);
+                    this.router.navigate(['home']);
+                });
+            },
             error: (err) => {
                 const status = err.status;
                 if (status == 401 || status == 404) {

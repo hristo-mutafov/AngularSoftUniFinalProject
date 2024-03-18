@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+
 import { HttpService } from '../../../core/services/http.service';
 import { EmailDirective } from '../../../shared/directives/email.directive';
 import { EqualPasswordDirective } from '../../../shared/directives/equal-password.directive';
@@ -8,6 +9,7 @@ import {
     AUTHENTICATION_400,
     AUTHENTICATION_500,
 } from '../../../shared/constants';
+import { AuthStateService } from '../../../core/state/auth-state.service';
 
 @Component({
     selector: 'app-register',
@@ -22,6 +24,7 @@ export class RegisterComponent {
     constructor(
         private api: HttpService,
         private router: Router,
+        private authState: AuthStateService,
     ) {}
 
     register(form: NgForm) {
@@ -30,7 +33,12 @@ export class RegisterComponent {
         const { email, password } = form.value;
 
         this.api.register(email, password).subscribe({
-            next: () => this.router.navigate(['home']),
+            next: () => {
+                this.api.getProfile().subscribe((profile) => {
+                    this.authState.setProfile(profile);
+                    this.router.navigate(['home']);
+                });
+            },
             error: (err) => {
                 const status = err.status;
                 if (status == 400) {
