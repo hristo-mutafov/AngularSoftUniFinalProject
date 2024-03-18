@@ -31,4 +31,4 @@ Refresh token - local storage
 
 #### Authorization
 
-Authorization is implemented using two guards. One (`is-authenticated.guard.ts`) checks if the user is authenticated and the other (`is-staff.guard.ts`) checks if he has a specific role (isStaff role).
+Authorization is implemented using three guards. First two (`is-authenticated.guard.ts` and `already-authenticated.guard.ts`) checks if the user is authenticated and the other (`is-staff.guard.ts`) checks if he has a specific role (isStaff role).
