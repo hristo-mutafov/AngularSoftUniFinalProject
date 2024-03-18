@@ -9,6 +9,7 @@ import { ProfilePanelStateService } from '../../../core/services/profile-panel-s
 import { BLANK_FIELD_MESSAGE } from '../../../shared/constants';
 import { EditCityPanelComponent } from '../../../shared/components/edit-city-panel/edit-city-panel.component';
 import { EditAddressPanelComponent } from '../../../shared/components/edit-address-panel/edit-address-panel.component';
+import { EditPhoneNumberPanelComponent } from '../../../shared/components/edit-phone-number-panel/edit-phone-number-panel.component';
 
 @Component({
     selector: 'app-profile-address',
@@ -17,6 +18,7 @@ import { EditAddressPanelComponent } from '../../../shared/components/edit-addre
         ProfileSidenavComponent,
         EditCityPanelComponent,
         EditAddressPanelComponent,
+        EditPhoneNumberPanelComponent,
     ],
     templateUrl: './profile-address.component.html',
     styleUrl: '../all-profile.css',
@@ -56,6 +58,11 @@ export class ProfileAddressComponent implements OnInit, OnDestroy {
     showEditAddressPanel() {
         this.profilePanelState.isActive = true;
         this.openedPanels.editAddressPanel = true;
+    }
+
+    showEditPhoneNumberPanel() {
+        this.profilePanelState.isActive = true;
+        this.openedPanels.editPhoneNumberPanel = true;
     }
 
     hideOpenedPanels() {
