@@ -3,6 +3,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 
 import { HttpService } from '../../../core/services/http.service';
 import { AuthStateService } from '../../../core/state/auth-state.service';
+import { FIELDS_ARE_REQUIRED, SERVER_ERROR_500 } from '../../constants';
 
 @Component({
     selector: 'app-edit-name-panel',
@@ -27,7 +28,7 @@ export class EditNamePanelComponent {
 
     editNames(form: NgForm) {
         if (form.invalid) {
-            this.formError = 'Both names are required!';
+            this.formError = FIELDS_ARE_REQUIRED;
             return;
         }
         const {
@@ -45,7 +46,7 @@ export class EditNamePanelComponent {
                 this.authState.setProfileFromState(profile);
             },
             error: () => {
-                //TODO: Redirect to 500 page
+                this.formError = SERVER_ERROR_500;
             },
         });
     }

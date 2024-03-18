@@ -3,7 +3,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpService } from '../../../core/services/http.service';
 import { AuthStateService } from '../../../core/state/auth-state.service';
-import { SERVER_ERROR_500 } from '../../constants';
+import {
+    FIELDS_ARE_REQUIRED,
+    SAME_EMAIL,
+    SERVER_ERROR_500,
+} from '../../constants';
 
 @Component({
     selector: 'app-edit-email-panel',
@@ -28,7 +32,7 @@ export class EditEmailPanelComponent {
 
     editEmail(form: NgForm) {
         if (form.invalid) {
-            this.formError = 'Both fields are required!';
+            this.formError = FIELDS_ARE_REQUIRED;
             return;
         }
         const { email, password }: { email: string; password: string } =
@@ -37,7 +41,7 @@ export class EditEmailPanelComponent {
         const profile = this.authState.getProfile()!;
 
         if (email === profile.email) {
-            this.formError = 'Type different email than the current one!';
+            this.formError = SAME_EMAIL;
             return;
         }
 

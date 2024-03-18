@@ -4,3 +4,6 @@ export const emailRegEx = new RegExp(
 
 export const AUTHENTICATION_400 = 'Incorrect Email or Password';
 export const SERVER_ERROR_500 = 'Server Error. Try again later';
+
+export const SAME_EMAIL = 'Type different email than the current one!';
+export const FIELDS_ARE_REQUIRED = 'All fields are required!';
