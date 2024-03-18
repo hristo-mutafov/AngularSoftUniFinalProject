@@ -8,11 +8,16 @@ import { AuthStateService } from '../../../core/state/auth-state.service';
 import { ProfilePanelStateService } from '../../../core/services/profile-panel-state.service';
 import { BLANK_FIELD_MESSAGE } from '../../../shared/constants';
 import { EditCityPanelComponent } from '../../../shared/components/edit-city-panel/edit-city-panel.component';
+import { EditAddressPanelComponent } from '../../../shared/components/edit-address-panel/edit-address-panel.component';
 
 @Component({
     selector: 'app-profile-address',
     standalone: true,
-    imports: [ProfileSidenavComponent, EditCityPanelComponent],
+    imports: [
+        ProfileSidenavComponent,
+        EditCityPanelComponent,
+        EditAddressPanelComponent,
+    ],
     templateUrl: './profile-address.component.html',
     styleUrl: '../all-profile.css',
 })
@@ -46,6 +51,11 @@ export class ProfileAddressComponent implements OnInit, OnDestroy {
     showEditCityPanel() {
         this.profilePanelState.isActive = true;
         this.openedPanels.editCityPanel = true;
+    }
+
+    showEditAddressPanel() {
+        this.profilePanelState.isActive = true;
+        this.openedPanels.editAddressPanel = true;
     }
 
     hideOpenedPanels() {

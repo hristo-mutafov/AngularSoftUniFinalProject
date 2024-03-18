@@ -5,6 +5,13 @@
     />
 }
 
+@if (openedPanels.editAddressPanel) {
+    <app-edit-address-panel
+        class="edit_panel active"
+        (hideChangeNamePanel)="hideOpenedPanels()"
+    />
+}
+
 <section class="settings">
     <div class="credentials">
         <h2 class="heading">Address</h2>
@@ -45,7 +52,11 @@
                         }
                     </div>
                 </div>
-                <button id="edit_address_btn" class="btn">
+                <button
+                    (click)="showEditAddressPanel()"
+                    id="edit_address_btn"
+                    class="btn"
+                >
                     <i class="far fa-edit"></i> Edit
                 </button>
             </li>
