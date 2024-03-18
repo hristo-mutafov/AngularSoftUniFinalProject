@@ -31,7 +31,7 @@ export class ProfileAddressComponent implements OnInit, OnDestroy {
         editAddressPanel: false,
         editPhoneNumberPanel: false,
     };
-    blankFieldMessage = BLANK_FIELD_MESSAGE; //TODO: Implement on the other place
+    blankFieldMessage = BLANK_FIELD_MESSAGE;
 
     constructor(
         private authState: AuthStateService,

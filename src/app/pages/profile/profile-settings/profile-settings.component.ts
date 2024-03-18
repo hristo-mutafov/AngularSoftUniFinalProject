@@ -10,6 +10,7 @@ import { EditEmailPanelComponent } from '../../../shared/components/edit-email-p
 import { EditPasswordPanelComponent } from '../../../shared/components/edit-password-panel/edit-password-panel.component';
 import { DeleteProfilePanelComponent } from '../../../shared/components/delete-profile-panel/delete-profile-panel.component';
 import { ProfilePanelStateService } from '../../../core/services/profile-panel-state.service';
+import { BLANK_FIELD_MESSAGE } from '../../../shared/constants';
 
 @Component({
     selector: 'app-profile-settings',
@@ -33,6 +34,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
         editPasswordPanel: false,
         deleteProfilePanel: false,
     };
+    blankFieldMessage = BLANK_FIELD_MESSAGE;
 
     constructor(
         private authState: AuthStateService,
