@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { catchError, retry, tap, throwError } from 'rxjs';
 
 import {
     IAuthResponse,
+    IProductList,
     IProfile,
     IRefreshTokenResponse,
     IUpdateProfileData,
 } from '../../types';
 import { TokenService } from './token.service';
+import { ERROR_RETRY_TIMES } from '../../shared/constants';
 
 @Injectable({
     providedIn: 'root',
@@ -59,5 +61,14 @@ export class HttpService {
 
     deleteProfile() {
         return this.http.delete('/api/user');
+    }
+
+    getProductList() {
+        return this.http.get<IProductList>('/api/products').pipe(
+            retry(ERROR_RETRY_TIMES),
+            catchError((err: HttpErrorResponse) => {
+                return throwError(err);
+            }),
+        );
     }
 }

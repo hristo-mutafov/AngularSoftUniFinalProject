@@ -1,25 +1,22 @@
 <section class="products_wrapper">
-    <!-- {% if products %} -->
-    <!-- {% for product in products %} -->
-
-    <div class="product">
-        <img src="{{ product.image }}" alt="" class="image" />
-        <div class="data_section">
-            <div class="text_container">
-                <h3 class="heading">{{ product.name }}</h3>
-                <p class="price">{{ product.price }}</p>
+    @if (products) {
+        @for (product of products; track product.id) {
+            <div class="product">
+                <img src="{{ product.image }}" alt="" class="image" />
+                <div class="data_section">
+                    <div class="text_container">
+                        <h3 class="heading">{{ product.name }}</h3>
+                        <p class="price">{{ product.price }}</p>
+                    </div>
+                    @if (product?.in_favorites) {
+                        <i id="icon" class="fas fa-heart"></i>
+                    } @else {
+                        <i id="icon" class="far fa-heart"></i>
+                    }
+                </div>
             </div>
-            <!-- {% if user.is_authenticated and product|is_in_favorites:user %}
-                            <i onclick="addToFavorites(event, {{ product.id }})" id="icon" class="fas fa-heart"></i>
-                        {% else %}
-                            <i onclick="addToFavorites(event, {{ product.id }})" id="icon" class="far fa-heart"></i>
-                        {% endif %} -->
-        </div>
-    </div>
-
-    <!-- {% endfor %} -->
-
-    <!-- {% else %}
-            <h1 class="emptyPageMassage">There is no products yet!</h1>
-        {% endif %} -->
+        }
+    } @else {
+        <h1 class="emptyPageMassage">There is no products yet!</h1>
+    }
 </section>
