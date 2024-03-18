@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileSidenavComponent } from '../../../shared/profile-sidenav/profile-sidenav.component';
+import { ProfileSidenavComponent } from '../../../shared/components/profile-sidenav/profile-sidenav.component';
 
 @Component({
     selector: 'app-profile-address',

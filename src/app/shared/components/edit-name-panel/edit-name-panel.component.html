@@ -1,0 +1,36 @@
+<div id="change_name_panel" class="edit_panel active">
+    <i (click)="closePanel()" class="fas fa-times"></i>
+    <h3 class="heading">Change name</h3>
+
+    <form #form="ngForm" class="form" (ngSubmit)="editNames(form)">
+        @if (formError) {
+            <p class="error_message">Both names are required!</p>
+        }
+
+        <div class="field_wrapper">
+            <label for="first_name">First Name:</label>
+            <input
+                name="first_name"
+                id="first_name"
+                type="text"
+                #firstNameField="ngModel"
+                ngModel
+                required
+            />
+        </div>
+
+        <div class="field_wrapper">
+            <label for="last_name">Last Name:</label>
+            <input
+                name="last_name"
+                type="text"
+                id="last_name"
+                #lastNameField="ngModel"
+                ngModel
+                required
+            />
+        </div>
+
+        <button id="saveName" class="btn">Save</button>
+    </form>
+</div>

@@ -1,0 +1,37 @@
+.edit_panel.active .heading {
+    text-align: center;
+}
+
+.edit_panel.active .form {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.edit_panel.active .error_message {
+    color: #f85149;
+    text-align: center;
+}
+
+.edit_panel.active .field_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_panel.active i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.edit_panel.active .heading a {
+    font-size: 28px;
+    text-align: center;
+    text-decoration: none;
+    color: #1d1d1f;
+}
+
+.edit_panel #deleteProfileBtn:hover {
+    background-color: red;
+}

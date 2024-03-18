@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 
-import { IAuthResponse, IProfile, IRefreshTokenResponse } from '../../types';
+import {
+    IAuthResponse,
+    IProfile,
+    IRefreshTokenResponse,
+    IUpdateProfileData,
+} from '../../types';
 import { TokenService } from './token.service';
 
 @Injectable({
@@ -39,5 +44,9 @@ export class HttpService {
 
     getProfile() {
         return this.http.get<IProfile>('/api/user');
+    }
+
+    updateProfile(data: IUpdateProfileData) {
+        return this.http.patch<{ message: string }>('/api/user', data);
     }
 }

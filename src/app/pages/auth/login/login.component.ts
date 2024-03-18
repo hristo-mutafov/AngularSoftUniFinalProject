@@ -2,13 +2,13 @@ import { Component, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-import { EmailDirective } from '../../../shared/directives/email.directive';
 import { HttpService } from '../../../core/services/http.service';
+import { AuthStateService } from '../../../core/state/auth-state.service';
 import {
     AUTHENTICATION_400,
     AUTHENTICATION_500,
 } from '../../../shared/constants';
-import { AuthStateService } from '../../../core/state/auth-state.service';
+import { EmailDirective } from '../../../shared/directives/email.directive';
 
 @Component({
     selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent {
         this.api.login(email, password).subscribe({
             next: () => {
                 this.api.getProfile().subscribe((profile) => {
-                    this.authState.setProfile(profile);
+                    this.authState.setProfileFromServer(profile);
                     this.router.navigate(['home']);
                 });
             },

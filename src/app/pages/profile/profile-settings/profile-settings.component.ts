@@ -1,11 +1,66 @@
-import { Component } from '@angular/core';
-import { ProfileSidenavComponent } from '../../../shared/profile-sidenav/profile-sidenav.component';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthStateService } from '../../../core/state/auth-state.service';
+import { ProfileSidenavComponent } from '../../../shared/components/profile-sidenav/profile-sidenav.component';
+import { IProfileState } from '../../../types';
+import { EditNamePanelComponent } from '../../../shared/components/edit-name-panel/edit-name-panel.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-profile-settings',
     standalone: true,
-    imports: [ProfileSidenavComponent],
+    imports: [ProfileSidenavComponent, EditNamePanelComponent],
     templateUrl: './profile-settings.component.html',
     styleUrl: '../all-profile.css',
 })
-export class ProfileSettingsComponent {}
+export class ProfileSettingsComponent implements OnInit, OnDestroy {
+    authStateSubscription: Subscription | null = null;
+    profile: IProfileState | null = null;
+    openedPanels = {
+        editNamePanel: false,
+        editEmailPanel: false,
+        editPasswordPanel: false,
+    };
+
+    get eitherPanelOpened(): boolean {
+        let contain = false;
+
+        Object.keys(this.openedPanels).forEach((panel) => {
+            if (this.openedPanels[panel as keyof typeof this.openedPanels]) {
+                contain = true;
+            }
+        });
+
+        return contain;
+    }
+
+    constructor(
+        private authState: AuthStateService,
+        private router: Router,
+    ) {}
+    ngOnInit(): void {
+        this.authStateSubscription = this.authState
+            .getProfile$()
+            .subscribe((profile) => {
+                if (!profile) {
+                    this.router.navigate(['home']);
+                }
+                this.profile = profile;
+            });
+    }
+
+    showEditNamePanel() {
+        this.openedPanels.editNamePanel = true;
+    }
+
+    hideOpenedPanels() {
+        Object.keys(this.openedPanels).forEach((panel) => {
+            this.openedPanels[panel as keyof typeof this.openedPanels] = false;
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.authStateSubscription?.unsubscribe();
+    }
+}

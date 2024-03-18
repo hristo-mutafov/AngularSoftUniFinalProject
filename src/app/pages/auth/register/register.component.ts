@@ -3,13 +3,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import { HttpService } from '../../../core/services/http.service';
-import { EmailDirective } from '../../../shared/directives/email.directive';
-import { EqualPasswordDirective } from '../../../shared/directives/equal-password.directive';
+import { AuthStateService } from '../../../core/state/auth-state.service';
 import {
     AUTHENTICATION_400,
     AUTHENTICATION_500,
 } from '../../../shared/constants';
-import { AuthStateService } from '../../../core/state/auth-state.service';
+import { EmailDirective } from '../../../shared/directives/email.directive';
+import { EqualPasswordDirective } from '../../../shared/directives/equal-password.directive';
 
 @Component({
     selector: 'app-register',
@@ -35,7 +35,7 @@ export class RegisterComponent {
         this.api.register(email, password).subscribe({
             next: () => {
                 this.api.getProfile().subscribe((profile) => {
-                    this.authState.setProfile(profile);
+                    this.authState.setProfileFromServer(profile);
                     this.router.navigate(['home']);
                 });
             },

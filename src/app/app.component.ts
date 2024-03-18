@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     private getProfile(): void {
         this.http.getProfile().subscribe({
             next: (profile) => {
-                this.authState.setProfile(profile);
+                this.authState.setProfileFromServer(profile);
                 this.loading = false;
             },
             error: () => (this.loading = false),

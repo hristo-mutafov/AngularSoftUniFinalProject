@@ -117,45 +117,6 @@
     flex-direction: column;
 }
 
-.profile_settings .edit_panel.active .heading {
-    text-align: center;
-}
-
-.profile_settings .edit_panel.active .form {
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-}
-
-.profile_settings .edit_panel.active .error_message {
-    display: none;
-    color: #f85149;
-    text-align: center;
-}
-
-.profile_settings .edit_panel.active .field_wrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.profile_settings .edit_panel.active i {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-.profile_settings .edit_panel.active .heading a {
-    font-size: 28px;
-    text-align: center;
-    text-decoration: none;
-    color: #1d1d1f;
-}
-
-.profile_settings .edit_panel #deleteProfileBtn:hover {
-    background-color: red;
-}
-
 #main.active::before {
     content: '';
     position: absolute;

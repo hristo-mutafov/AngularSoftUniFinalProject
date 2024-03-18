@@ -27,3 +27,13 @@ export interface IProfileState {
     city?: string;
     phoneNumber?: string;
 }
+
+export interface IUpdateProfileData {
+    first_name?: string;
+    last_name?: string;
+    password?: string;
+    phone_number?: string;
+    address?: string;
+    city?: string;
+    gender?: string;
+}
