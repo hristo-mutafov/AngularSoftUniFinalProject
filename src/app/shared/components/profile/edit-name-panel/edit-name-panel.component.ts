@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
-import { HttpService } from '../../../core/services/http.service';
-import { AuthStateService } from '../../../core/state/auth-state.service';
-import { FIELDS_ARE_REQUIRED, SERVER_ERROR_500 } from '../../constants';
+import { HttpService } from '../../../../core/services/http.service';
+import { AuthStateService } from '../../../../core/state/auth-state.service';
+import { FIELDS_ARE_REQUIRED, SERVER_ERROR_500 } from '../../../constants';
 
 @Component({
     selector: 'app-edit-name-panel',

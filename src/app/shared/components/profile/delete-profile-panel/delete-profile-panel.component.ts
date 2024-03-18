@@ -2,10 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { HttpService } from '../../../core/services/http.service';
-import { AuthStateService } from '../../../core/state/auth-state.service';
-import { SERVER_ERROR_500 } from '../../constants';
-import { TokenService } from '../../../core/services/token.service';
+import { HttpService } from '../../../../core/services/http.service';
+import { TokenService } from '../../../../core/services/token.service';
+import { AuthStateService } from '../../../../core/state/auth-state.service';
+import { SERVER_ERROR_500 } from '../../../constants';
 
 @Component({
     selector: 'app-delete-profile-panel',

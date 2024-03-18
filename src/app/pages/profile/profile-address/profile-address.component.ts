@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { ProfileSidenavComponent } from '../../../shared/components/profile-sidenav/profile-sidenav.component';
-import { IProfileState } from '../../../types';
-import { AuthStateService } from '../../../core/state/auth-state.service';
 import { ProfilePanelStateService } from '../../../core/services/profile-panel-state.service';
+import { AuthStateService } from '../../../core/state/auth-state.service';
+import { EditAddressPanelComponent } from '../../../shared/components/profile/edit-address-panel/edit-address-panel.component';
+import { EditCityPanelComponent } from '../../../shared/components/profile/edit-city-panel/edit-city-panel.component';
+import { EditPhoneNumberPanelComponent } from '../../../shared/components/profile/edit-phone-number-panel/edit-phone-number-panel.component';
+import { ProfileSidenavComponent } from '../../../shared/components/profile/profile-sidenav/profile-sidenav.component';
 import { BLANK_FIELD_MESSAGE } from '../../../shared/constants';
-import { EditCityPanelComponent } from '../../../shared/components/edit-city-panel/edit-city-panel.component';
-import { EditAddressPanelComponent } from '../../../shared/components/edit-address-panel/edit-address-panel.component';
-import { EditPhoneNumberPanelComponent } from '../../../shared/components/edit-phone-number-panel/edit-phone-number-panel.component';
+import { IProfileState } from '../../../types';
 
 @Component({
     selector: 'app-profile-address',

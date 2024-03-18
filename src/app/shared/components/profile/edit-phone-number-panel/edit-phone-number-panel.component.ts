@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { FIELDS_ARE_REQUIRED, SERVER_ERROR_500 } from '../../constants';
-import { HttpService } from '../../../core/services/http.service';
-import { AuthStateService } from '../../../core/state/auth-state.service';
+import { HttpService } from '../../../../core/services/http.service';
+import { AuthStateService } from '../../../../core/state/auth-state.service';
+import { FIELDS_ARE_REQUIRED, SERVER_ERROR_500 } from '../../../constants';
 
 @Component({
-    selector: 'app-edit-city-panel',
+    selector: 'app-edit-phone-number-panel',
     standalone: true,
     imports: [FormsModule],
-    templateUrl: './edit-city-panel.component.html',
+    templateUrl: './edit-phone-number-panel.component.html',
     styleUrl: '../edit-panel.css',
 })
-export class EditCityPanelComponent {
+export class EditPhoneNumberPanelComponent {
     @Output() hideChangeNamePanel = new EventEmitter();
 
     formError: string = '';
@@ -25,19 +25,19 @@ export class EditCityPanelComponent {
         this.hideChangeNamePanel.emit();
     }
 
-    editEmail(form: NgForm) {
+    editPhoneNumber(form: NgForm) {
         if (form.invalid) {
             this.formError = FIELDS_ARE_REQUIRED;
             return;
         }
-        const { city }: { city: string } = form.value;
+        const { phoneNumber }: { phoneNumber: string } = form.value;
 
         const profile = this.authState.getProfile()!;
 
-        this.http.updateProfile({ city }).subscribe({
+        this.http.updateProfile({ phone_number: phoneNumber }).subscribe({
             next: () => {
                 this.closePanel();
-                profile.city = city;
+                profile.phoneNumber = phoneNumber;
                 this.authState.setProfileFromState(profile);
             },
             error: () => {

@@ -1,22 +1,22 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { HttpService } from '../../../../core/services/http.service';
+import { AuthStateService } from '../../../../core/state/auth-state.service';
 import {
     FIELDS_ARE_REQUIRED,
-    PASSWORD_NOT_MATCH,
+    SAME_EMAIL,
     SERVER_ERROR_500,
-} from '../../constants';
-import { HttpService } from '../../../core/services/http.service';
-import { AuthStateService } from '../../../core/state/auth-state.service';
-import { HttpErrorResponse } from '@angular/common/http';
+} from '../../../constants';
 
 @Component({
-    selector: 'app-edit-password-panel',
+    selector: 'app-edit-email-panel',
     standalone: true,
     imports: [FormsModule],
-    templateUrl: './edit-password-panel.component.html',
+    templateUrl: './edit-email-panel.component.html',
     styleUrl: '../edit-panel.css',
 })
-export class EditPasswordPanelComponent {
+export class EditEmailPanelComponent {
     @Output() hideChangeNamePanel = new EventEmitter();
 
     formError: string = '';
@@ -30,31 +30,28 @@ export class EditPasswordPanelComponent {
         this.hideChangeNamePanel.emit();
     }
 
-    editPassword(form: NgForm) {
+    editEmail(form: NgForm) {
         if (form.invalid) {
             this.formError = FIELDS_ARE_REQUIRED;
             return;
         }
-        const {
-            oldPassword,
-            newPassword,
-            repeatNewPassword,
-        }: {
-            oldPassword: string;
-            newPassword: string;
-            repeatNewPassword: string;
-        } = form.value;
+        const { email, password }: { email: string; password: string } =
+            form.value;
 
-        if (newPassword !== repeatNewPassword) {
-            this.formError = PASSWORD_NOT_MATCH;
+        const profile = this.authState.getProfile()!;
+
+        if (email === profile.email) {
+            this.formError = SAME_EMAIL;
             return;
         }
 
-        this.http.validatePassword(oldPassword).subscribe({
+        this.http.validatePassword(password).subscribe({
             next: () => {
-                this.http.updateProfile({ password: newPassword }).subscribe({
+                this.http.updateProfile({ email }).subscribe({
                     next: () => {
                         this.closePanel();
+                        profile.email = email;
+                        this.authState.setProfileFromState(profile);
                     },
                     error: () => {
                         this.formError = SERVER_ERROR_500;

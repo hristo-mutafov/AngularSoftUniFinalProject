@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthStateService } from '../../../core/state/auth-state.service';
-import { ProfileSidenavComponent } from '../../../shared/components/profile-sidenav/profile-sidenav.component';
-import { IProfileState } from '../../../types';
-import { EditNamePanelComponent } from '../../../shared/components/edit-name-panel/edit-name-panel.component';
 import { Subscription } from 'rxjs';
-import { EditEmailPanelComponent } from '../../../shared/components/edit-email-panel/edit-email-panel.component';
-import { EditPasswordPanelComponent } from '../../../shared/components/edit-password-panel/edit-password-panel.component';
-import { DeleteProfilePanelComponent } from '../../../shared/components/delete-profile-panel/delete-profile-panel.component';
 import { ProfilePanelStateService } from '../../../core/services/profile-panel-state.service';
+import { AuthStateService } from '../../../core/state/auth-state.service';
+import { DeleteProfilePanelComponent } from '../../../shared/components/profile/delete-profile-panel/delete-profile-panel.component';
+import { EditEmailPanelComponent } from '../../../shared/components/profile/edit-email-panel/edit-email-panel.component';
+import { EditNamePanelComponent } from '../../../shared/components/profile/edit-name-panel/edit-name-panel.component';
+import { EditPasswordPanelComponent } from '../../../shared/components/profile/edit-password-panel/edit-password-panel.component';
+import { ProfileSidenavComponent } from '../../../shared/components/profile/profile-sidenav/profile-sidenav.component';
 import { BLANK_FIELD_MESSAGE } from '../../../shared/constants';
+import { IProfileState } from '../../../types';
 
 @Component({
     selector: 'app-profile-settings',
