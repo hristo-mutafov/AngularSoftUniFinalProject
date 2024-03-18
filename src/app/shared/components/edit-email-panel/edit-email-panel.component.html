@@ -1,0 +1,36 @@
+<div id="change_email_panel" class="edit_panel active">
+    <i (click)="closePanel()" class="fas fa-times"></i>
+    <h3 class="heading">Change Email</h3>
+
+    <form #form="ngForm" class="form" (ngSubmit)="editEmail(form)">
+        @if (formError) {
+            <p class="error_message">{{ formError }}</p>
+        }
+
+        <div class="field_wrapper">
+            <label for="emailInput">New Email:</label>
+            <input
+                name="email"
+                id="emailInput"
+                type="text"
+                #emailField="ngModel"
+                ngModel
+                required
+            />
+        </div>
+
+        <div class="field_wrapper">
+            <label for="passwordInput">Password:</label>
+            <input
+                name="password"
+                id="passwordInput"
+                type="password"
+                #passwordField="ngModel"
+                ngModel
+                required
+            />
+        </div>
+
+        <button name="email_form" id="saveEmail" class="btn">Save</button>
+    </form>
+</div>

@@ -6,11 +6,16 @@ import { ProfileSidenavComponent } from '../../../shared/components/profile-side
 import { IProfileState } from '../../../types';
 import { EditNamePanelComponent } from '../../../shared/components/edit-name-panel/edit-name-panel.component';
 import { Subscription } from 'rxjs';
+import { EditEmailPanelComponent } from '../../../shared/components/edit-email-panel/edit-email-panel.component';
 
 @Component({
     selector: 'app-profile-settings',
     standalone: true,
-    imports: [ProfileSidenavComponent, EditNamePanelComponent],
+    imports: [
+        ProfileSidenavComponent,
+        EditNamePanelComponent,
+        EditEmailPanelComponent,
+    ],
     templateUrl: './profile-settings.component.html',
     styleUrl: '../all-profile.css',
 })
@@ -52,6 +57,10 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
     showEditNamePanel() {
         this.openedPanels.editNamePanel = true;
+    }
+
+    showEditEmailPanel() {
+        this.openedPanels.editEmailPanel = true;
     }
 
     hideOpenedPanels() {

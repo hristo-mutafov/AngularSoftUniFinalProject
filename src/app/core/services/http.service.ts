@@ -49,4 +49,11 @@ export class HttpService {
     updateProfile(data: IUpdateProfileData) {
         return this.http.patch<{ message: string }>('/api/user', data);
     }
+
+    validatePassword(password: string) {
+        return this.http.post<{ message: string }>(
+            '/api/user/validate_password',
+            { password },
+        );
+    }
 }

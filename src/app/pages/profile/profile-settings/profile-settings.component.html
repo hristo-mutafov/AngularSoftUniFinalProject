@@ -7,28 +7,12 @@
             />
         }
 
-        <div id="change_email_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Change Email</h3>
-
-            <form class="form">
-                <p class="error_message"></p>
-
-                <div class="field_wrapper">
-                    <label for="emailInput">New Email:</label>
-                    <input name="email" id="emailInput" type="text" />
-                </div>
-
-                <div class="field_wrapper">
-                    <label for="passwordInput">Password:</label>
-                    <input name="password" id="passwordInput" type="password" />
-                </div>
-
-                <button name="email_form" id="saveEmail" class="btn">
-                    Save
-                </button>
-            </form>
-        </div>
+        @if (openedPanels.editEmailPanel) {
+            <app-edit-email-panel
+                class="edit_panel active"
+                (hideChangeNamePanel)="hideOpenedPanels()"
+            />
+        }
 
         <div id="change_password_panel" class="edit_panel">
             <i class="fas fa-times"></i>
@@ -121,7 +105,11 @@
                                 }}</span>
                             </div>
                         </div>
-                        <button id="edit_email_btn" class="btn">
+                        <button
+                            (click)="showEditEmailPanel()"
+                            id="edit_email_btn"
+                            class="btn"
+                        >
                             <i class="far fa-edit"></i> Edit
                         </button>
                     </li>

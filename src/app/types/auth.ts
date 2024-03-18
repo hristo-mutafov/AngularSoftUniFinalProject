@@ -29,6 +29,7 @@ export interface IProfileState {
 }
 
 export interface IUpdateProfileData {
+    email?: string;
     first_name?: string;
     last_name?: string;
     password?: string;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 import { HttpService } from '../../../core/services/http.service';
@@ -9,7 +9,7 @@ import { AuthStateService } from '../../../core/state/auth-state.service';
     standalone: true,
     imports: [FormsModule],
     templateUrl: './edit-name-panel.component.html',
-    styleUrl: './edit-name-panel.component.css',
+    styleUrl: '../edit-panel.css',
 })
 export class EditNamePanelComponent {
     @Output() hideChangeNamePanel = new EventEmitter();
