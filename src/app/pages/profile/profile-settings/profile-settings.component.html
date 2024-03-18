@@ -14,45 +14,12 @@
             />
         }
 
-        <div id="change_password_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Change Password</h3>
-
-            <form class="form">
-                <p class="error_message"></p>
-
-                <div class="field_wrapper">
-                    <label for="oldPasswordInput">Old Password:</label>
-                    <input
-                        name="old_password"
-                        id="oldPasswordInput"
-                        type="password"
-                    />
-                </div>
-
-                <div class="field_wrapper">
-                    <label for="newPasswordInput">New Password:</label>
-                    <input
-                        name="new_password"
-                        id="newPasswordInput"
-                        type="password"
-                    />
-                </div>
-
-                <div class="field_wrapper">
-                    <label for="repeatPasswordInput"
-                        >Repeat New Password:</label
-                    >
-                    <input
-                        name="repeat_new_password"
-                        id="repeatPasswordInput"
-                        type="password"
-                    />
-                </div>
-
-                <button id="savePassword" class="btn">Save</button>
-            </form>
-        </div>
+        @if (openedPanels.editPasswordPanel) {
+            <app-edit-password-panel
+                class="edit_panel active"
+                (hideChangeNamePanel)="hideOpenedPanels()"
+            />
+        }
 
         <div id="delete_profile_panel" class="edit_panel">
             <i class="fas fa-times"></i>
@@ -121,7 +88,11 @@
                                 <p class="field">********</p>
                             </div>
                         </div>
-                        <button id="change_password_btn" class="btn">
+                        <button
+                            (click)="showEditPasswordPanel()"
+                            id="change_password_btn"
+                            class="btn"
+                        >
                             <i class="far fa-edit"></i> Edit
                         </button>
                     </li>

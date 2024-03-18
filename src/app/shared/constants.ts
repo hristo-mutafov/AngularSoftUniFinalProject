@@ -7,3 +7,4 @@ export const SERVER_ERROR_500 = 'Server Error. Try again later';
 
 export const SAME_EMAIL = 'Type different email than the current one!';
 export const FIELDS_ARE_REQUIRED = 'All fields are required!';
+export const PASSWORD_NOT_MATCH = 'Passwords do not match!';
