@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+
 import { EmailDirective } from '../../../shared/directives/email.directive';
 import { HttpService } from '../../../core/services/http.service';
 import {
@@ -31,7 +32,7 @@ export class LoginComponent {
             next: () => this.router.navigate(['home']),
             error: (err) => {
                 const status = err.status;
-                if (status == 400 || status == 404) {
+                if (status == 401 || status == 404) {
                     this.error.set(AUTHENTICATION_400);
                 } else {
                     this.error.set(AUTHENTICATION_500);
