@@ -2,15 +2,78 @@
     <section class="authentication">
         <div class="authentication_wrapper">
             <h1>Register</h1>
-            <form class="form">
-                <p id="error_messages"></p>
+            <form #form="ngForm" class="form" (ngSubmit)="register(form)">
                 <label for="email_field">Email</label>
-                <input id="email_field" type="text" />
+
+                <div>
+                    @if (emailField.touched) {
+                        @if (emailField.errors?.['required']) {
+                            <p class="error">Email is required!</p>
+                        }
+                        @if (emailField.errors?.['emailError']) {
+                            <p class="error">Email is not valid!</p>
+                        }
+                    }
+                    <input
+                        id="email_field"
+                        type="text"
+                        name="email"
+                        ngModel
+                        #emailField="ngModel"
+                        required
+                        appEmail
+                    />
+                </div>
                 <label for="password_field">Password</label>
-                <input id="password_field" type="password" />
+                <div>
+                    @if (passwordField.touched) {
+                        @if (passwordField.errors?.['required']) {
+                            <p class="error">Password is required!</p>
+                        }
+                        @if (passwordField.errors?.['minlength']) {
+                            <p class="error">
+                                Password must be at least 6 characters!
+                            </p>
+                        }
+                    }
+                    <input
+                        id="password_field"
+                        type="password"
+                        name="password"
+                        ngModel
+                        #passwordField="ngModel"
+                        required
+                        [minlength]="6"
+                    />
+                </div>
                 <label for="repeat_password_field">Repeat Password</label>
-                <input id="repeat_password_field" type="password" />
-                <button id="register_btn" class="authentication_btn">
+                <div>
+                    @if (rePasswordField.touched) {
+                        @if (rePasswordField.errors?.['required']) {
+                            <p class="error">Password is required!</p>
+                        }
+                        @if (rePasswordField.errors?.['passwordError']) {
+                            <p class="error">Passwords do not match!</p>
+                        }
+                    }
+                    <input
+                        id="repeat_password_field"
+                        type="password"
+                        name="rePassword"
+                        ngModel
+                        #rePasswordField="ngModel"
+                        required
+                        [appEqualPassword]="passwordField.value"
+                    />
+                </div>
+                @if (error()) {
+                    <p id="error_messages">{{ error() }}</p>
+                }
+                <button
+                    [disabled]="form.invalid"
+                    id="register_btn"
+                    class="authentication_btn"
+                >
                     Register
                 </button>
                 <p class="login_message">
