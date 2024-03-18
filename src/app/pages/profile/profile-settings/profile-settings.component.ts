@@ -34,18 +34,6 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
         deleteProfilePanel: false,
     };
 
-    get eitherPanelOpened(): boolean {
-        let contain = false;
-
-        Object.keys(this.openedPanels).forEach((panel) => {
-            if (this.openedPanels[panel as keyof typeof this.openedPanels]) {
-                contain = true;
-            }
-        });
-
-        return contain;
-    }
-
     constructor(
         private authState: AuthStateService,
         private router: Router,
