@@ -8,6 +8,7 @@ import { EditNamePanelComponent } from '../../../shared/components/edit-name-pan
 import { Subscription } from 'rxjs';
 import { EditEmailPanelComponent } from '../../../shared/components/edit-email-panel/edit-email-panel.component';
 import { EditPasswordPanelComponent } from '../../../shared/components/edit-password-panel/edit-password-panel.component';
+import { DeleteProfilePanelComponent } from '../../../shared/components/delete-profile-panel/delete-profile-panel.component';
 
 @Component({
     selector: 'app-profile-settings',
@@ -17,6 +18,7 @@ import { EditPasswordPanelComponent } from '../../../shared/components/edit-pass
         EditNamePanelComponent,
         EditEmailPanelComponent,
         EditPasswordPanelComponent,
+        DeleteProfilePanelComponent,
     ],
     templateUrl: './profile-settings.component.html',
     styleUrl: '../all-profile.css',
@@ -28,6 +30,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
         editNamePanel: false,
         editEmailPanel: false,
         editPasswordPanel: false,
+        deleteProfilePanel: false,
     };
 
     get eitherPanelOpened(): boolean {
@@ -67,6 +70,10 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
 
     showEditPasswordPanel() {
         this.openedPanels.editPasswordPanel = true;
+    }
+
+    showDeleteProfilePanel() {
+        this.openedPanels.deleteProfilePanel = true;
     }
 
     hideOpenedPanels() {

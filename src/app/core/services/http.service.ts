@@ -56,4 +56,8 @@ export class HttpService {
             { password },
         );
     }
+
+    deleteProfile() {
+        return this.http.delete('/api/user');
+    }
 }

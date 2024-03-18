@@ -21,13 +21,12 @@
             />
         }
 
-        <div id="delete_profile_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Delete Profile</h3>
-            <form method="post">
-                <button id="deleteProfileBtn" class="btn">Delete</button>
-            </form>
-        </div>
+        @if (openedPanels.deleteProfilePanel) {
+            <app-delete-profile-panel
+                class="edit_panel active"
+                (hideChangeNamePanel)="hideOpenedPanels()"
+            />
+        }
         <app-profile-sidenav />
         <section class="settings">
             <div class="credentials">
@@ -102,7 +101,13 @@
                 <h2 class="heading">Delete Profile</h2>
                 <div class="wrapper">
                     <p class="text">Deletes the profile permanently</p>
-                    <button id="deleteBtn" class="btn">Delete</button>
+                    <button
+                        (click)="showDeleteProfilePanel()"
+                        id="deleteBtn"
+                        class="btn"
+                    >
+                        Delete
+                    </button>
                 </div>
             </div>
         </section>
