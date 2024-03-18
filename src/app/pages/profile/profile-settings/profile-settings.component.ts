@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { EditEmailPanelComponent } from '../../../shared/components/edit-email-panel/edit-email-panel.component';
 import { EditPasswordPanelComponent } from '../../../shared/components/edit-password-panel/edit-password-panel.component';
 import { DeleteProfilePanelComponent } from '../../../shared/components/delete-profile-panel/delete-profile-panel.component';
+import { ProfilePanelStateService } from '../../../core/services/profile-panel-state.service';
 
 @Component({
     selector: 'app-profile-settings',
@@ -48,6 +49,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     constructor(
         private authState: AuthStateService,
         private router: Router,
+        private profilePanelState: ProfilePanelStateService,
     ) {}
     ngOnInit(): void {
         this.authStateSubscription = this.authState
@@ -61,18 +63,22 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
     }
 
     showEditNamePanel() {
+        this.profilePanelState.isActive = true;
         this.openedPanels.editNamePanel = true;
     }
 
     showEditEmailPanel() {
+        this.profilePanelState.isActive = true;
         this.openedPanels.editEmailPanel = true;
     }
 
     showEditPasswordPanel() {
+        this.profilePanelState.isActive = true;
         this.openedPanels.editPasswordPanel = true;
     }
 
     showDeleteProfilePanel() {
+        this.profilePanelState.isActive = true;
         this.openedPanels.deleteProfilePanel = true;
     }
 
@@ -80,6 +86,7 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
         Object.keys(this.openedPanels).forEach((panel) => {
             this.openedPanels[panel as keyof typeof this.openedPanels] = false;
         });
+        this.profilePanelState.isActive = false;
     }
 
     ngOnDestroy(): void {

@@ -1,6 +1,63 @@
-<main id="main">
-    <section class="profile_settings">
-        <div id="edit_city_panel" class="edit_panel">
+<section class="settings">
+    <div class="credentials">
+        <h2 class="heading">Address</h2>
+        <ul role="list">
+            <li class="list_item">
+                <div class="data">
+                    <i class="fas fa-city"></i>
+                    <div class="field_wrapper">
+                        <p class="field_label">City:</p>
+                        <!-- {% if city %}
+                                    <p id="city_field" class="field">{{ city }}</p>
+                                {% else %}
+                                    <p id="city_field" class="field">Not filled</p>
+                                {% endif %} -->
+                    </div>
+                </div>
+                <button id="edit_city_btn" class="btn">
+                    <i class="far fa-edit"></i> Edit
+                </button>
+            </li>
+            <li class="list_item">
+                <div class="data">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="field_wrapper">
+                        <p class="field_label">Address:</p>
+                        <!-- {% if address %}
+                                    <span id="address_field" class="field">{{ address }}</span>
+                                {% else %}
+                                    <span id="address_field" class="field">Not filled</span>
+                                {% endif %} -->
+                    </div>
+                </div>
+                <button id="edit_address_btn" class="btn">
+                    <i class="far fa-edit"></i> Edit
+                </button>
+            </li>
+            <li class="list_item">
+                <div class="data">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div class="field_wrapper">
+                        <p class="field_label">Phone Number:</p>
+                        <!-- {% if phone_number %}
+                                    <p id="phone_number_field" class="field">{{ phone_number }}</p>
+                                {% else %}
+                                    <p id="phone_number_field" class="field">Not filled</p>
+                                {% endif %} -->
+                    </div>
+                </div>
+                <button id="edit_phone_number_btn" class="btn">
+                    <i class="far fa-edit"></i> Edit
+                </button>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- 
+
+
+    <div id="edit_city_panel" class="edit_panel">
             <i class="fas fa-times"></i>
             <h3 class="heading">Change City</h3>
 
@@ -48,63 +105,4 @@
                 <button id="savePhoneNumber" class="btn">Save</button>
             </form>
         </div>
-
-        <app-profile-sidenav />
-
-        <section class="settings">
-            <div class="credentials">
-                <h2 class="heading">Address</h2>
-                <ul role="list">
-                    <li class="list_item">
-                        <div class="data">
-                            <i class="fas fa-city"></i>
-                            <div class="field_wrapper">
-                                <p class="field_label">City:</p>
-                                <!-- {% if city %}
-                                    <p id="city_field" class="field">{{ city }}</p>
-                                {% else %}
-                                    <p id="city_field" class="field">Not filled</p>
-                                {% endif %} -->
-                            </div>
-                        </div>
-                        <button id="edit_city_btn" class="btn">
-                            <i class="far fa-edit"></i> Edit
-                        </button>
-                    </li>
-                    <li class="list_item">
-                        <div class="data">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="field_wrapper">
-                                <p class="field_label">Address:</p>
-                                <!-- {% if address %}
-                                    <span id="address_field" class="field">{{ address }}</span>
-                                {% else %}
-                                    <span id="address_field" class="field">Not filled</span>
-                                {% endif %} -->
-                            </div>
-                        </div>
-                        <button id="edit_address_btn" class="btn">
-                            <i class="far fa-edit"></i> Edit
-                        </button>
-                    </li>
-                    <li class="list_item">
-                        <div class="data">
-                            <i class="fas fa-mobile-alt"></i>
-                            <div class="field_wrapper">
-                                <p class="field_label">Phone Number:</p>
-                                <!-- {% if phone_number %}
-                                    <p id="phone_number_field" class="field">{{ phone_number }}</p>
-                                {% else %}
-                                    <p id="phone_number_field" class="field">Not filled</p>
-                                {% endif %} -->
-                            </div>
-                        </div>
-                        <button id="edit_phone_number_btn" class="btn">
-                            <i class="far fa-edit"></i> Edit
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </section>
-</main>
+ -->

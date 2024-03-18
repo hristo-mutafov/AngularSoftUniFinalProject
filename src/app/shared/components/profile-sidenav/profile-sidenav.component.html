@@ -1,19 +1,31 @@
 <aside class="shorthand_nav">
     <ul role="list" class="profile_nav">
-        <li id="my_profile" class="list_item">
-            <a routerLink="/profile">My Profile</a>
+        <li
+            id="my_profile"
+            [class.active]="isActive('/profile/navigation')"
+            class="list_item"
+        >
+            <a routerLink="/profile/navigation">My Profile</a>
         </li>
         <li
             id="profile_settings"
-            style="background-color: rgba(0, 113, 227, 0.3)"
+            [class.active]="isActive('/profile/settings')"
             class="list_item"
         >
             <a routerLink="/profile/settings">Profile Settings</a>
         </li>
-        <li id="profile_address" class="list_item">
+        <li
+            id="profile_address"
+            [class.active]="isActive('/profile/address')"
+            class="list_item"
+        >
             <a routerLink="/profile/address">Address</a>
         </li>
-        <li id="profile_orders" class="list_item">
+        <li
+            id="profile_orders"
+            [class.active]="isActive('/profile/orders')"
+            class="list_item"
+        >
             <a routerLink="/profile/orders">Orders</a>
         </li>
         <li id="profile_logout" class="list_item">
@@ -23,3 +35,5 @@
         </li>
     </ul>
 </aside>
+
+<!-- style="background-color: rgba(0, 113, 227, 0.3)" -->

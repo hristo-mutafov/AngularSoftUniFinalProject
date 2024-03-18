@@ -6,7 +6,9 @@
         <ul role="list" class="wrapper">
             @if (isAuthenticated) {
                 <li class="list_item">
-                    <a routerLink="/profile"><i class="far fa-user"></i></a>
+                    <a routerLink="/profile/navigation"
+                        ><i class="far fa-user"></i
+                    ></a>
                 </li>
 
                 <li class="list_item">
@@ -52,7 +54,9 @@
         <ul (click)="clickBurger()" role="list" class="wrapper mobile">
             @if (isAuthenticated) {
                 <li routerLink="/home" class="list_item">Home</li>
-                <li routerLink="/profile" class="list_item">Profile</li>
+                <li routerLink="/profile/navigation" class="list_item">
+                    Profile
+                </li>
                 <li routerLink="/favorites" class="list_item">Favorites</li>
                 @if (isStaff) {
                     <li routerLink="/product/add" class="list_item">

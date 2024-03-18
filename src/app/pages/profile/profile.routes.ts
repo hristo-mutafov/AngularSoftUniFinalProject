@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
-import { ProfileComponent } from './profile.component';
-import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import { ProfileNavigationComponent } from './navigation/navigation.component';
 import { ProfileAddressComponent } from './profile-address/profile-address.component';
 import { ProfileOrdersComponent } from './profile-orders/profile-orders.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import { ProfileComponent } from './profile.component';
 
-export const routes: Routes = [
+export const profileRoutes: Routes = [
     {
         path: '',
+        component: ProfileComponent,
         children: [
-            {
-                path: '',
-                component: ProfileComponent,
-            },
             {
                 path: 'settings',
                 component: ProfileSettingsComponent,
@@ -25,5 +23,9 @@ export const routes: Routes = [
                 component: ProfileOrdersComponent,
             },
         ],
+    },
+    {
+        path: 'navigation',
+        component: ProfileNavigationComponent,
     },
 ];

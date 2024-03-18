@@ -27,6 +27,10 @@
     color: #0071e3;
 }
 
+.profile_nav .active {
+    background-color: rgba(0, 113, 227, 0.3);
+}
+
 @media screen and (max-width: 768px) {
     .shorthand_nav {
         display: none;

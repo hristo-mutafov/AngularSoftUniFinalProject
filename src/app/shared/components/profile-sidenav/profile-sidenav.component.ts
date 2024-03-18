@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-profile-sidenav',
     standalone: true,
-    imports: [RouterLink],
+    imports: [RouterLink, RouterLinkActive],
     templateUrl: './profile-sidenav.component.html',
     styleUrl: './profile-sidenav.component.css',
 })
-export class ProfileSidenavComponent {}
+export class ProfileSidenavComponent {
+    constructor(private router: Router) {}
+
+    isActive(route: string): boolean {
+        return this.router.isActive(route, true);
+    }
+}
