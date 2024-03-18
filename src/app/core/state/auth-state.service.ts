@@ -49,9 +49,15 @@ export class AuthStateService implements OnDestroy {
         this.authSubject$$.next({ isStaff });
     }
 
-    isStaff() {
-        console.log(this._isStaff);
+    isStaff$() {
+        return this.auth$.pipe(
+            map((state) => {
+                return !!state?.isStaff;
+            }),
+        );
+    }
 
+    isStaff() {
         return this._isStaff;
     }
 
