@@ -1,9 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpService } from '../../../core/services/http.service';
 import { AuthStateService } from '../../../core/state/auth-state.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { AUTHENTICATION_500 } from '../../constants';
+import { SERVER_ERROR_500 } from '../../constants';
 
 @Component({
     selector: 'app-edit-email-panel',
@@ -50,7 +50,7 @@ export class EditEmailPanelComponent {
                         this.authState.setProfileFromState(profile);
                     },
                     error: () => {
-                        this.formError = AUTHENTICATION_500;
+                        this.formError = SERVER_ERROR_500;
                     },
                 });
             },
@@ -61,7 +61,7 @@ export class EditEmailPanelComponent {
                 ) {
                     this.formError = err.error.message;
                 } else {
-                    this.formError = AUTHENTICATION_500;
+                    this.formError = SERVER_ERROR_500;
                 }
             },
         });

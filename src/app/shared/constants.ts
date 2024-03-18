@@ -3,4 +3,4 @@ export const emailRegEx = new RegExp(
 );
 
 export const AUTHENTICATION_400 = 'Incorrect Email or Password';
-export const AUTHENTICATION_500 = 'Server Error. Try again later';
+export const SERVER_ERROR_500 = 'Server Error. Try again later';

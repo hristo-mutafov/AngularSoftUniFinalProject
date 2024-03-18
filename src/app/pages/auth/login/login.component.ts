@@ -6,7 +6,7 @@ import { HttpService } from '../../../core/services/http.service';
 import { AuthStateService } from '../../../core/state/auth-state.service';
 import {
     AUTHENTICATION_400,
-    AUTHENTICATION_500,
+    SERVER_ERROR_500,
 } from '../../../shared/constants';
 import { EmailDirective } from '../../../shared/directives/email.directive';
 
@@ -42,7 +42,7 @@ export class LoginComponent {
                 if (status == 401 || status == 404) {
                     this.error.set(AUTHENTICATION_400);
                 } else {
-                    this.error.set(AUTHENTICATION_500);
+                    this.error.set(SERVER_ERROR_500);
                 }
             },
         });
