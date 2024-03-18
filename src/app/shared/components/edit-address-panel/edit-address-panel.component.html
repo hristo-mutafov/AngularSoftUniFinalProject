@@ -1,5 +1,5 @@
 <div id="edit_address_panel" class="edit_panel active">
-    <i class="fas fa-times"></i>
+    <i (click)="closePanel()" class="fas fa-times"></i>
     <h3 class="heading">Change Address</h3>
 
     <form #form="ngForm" class="form" (ngSubmit)="editAddress(form)">
