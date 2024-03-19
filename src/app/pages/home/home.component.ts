@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                         this.isLoading = false;
                         this.products = products[0].products;
                     },
-                    error: () => this.router.navigate(['not-found']), //TODO: redirect to 500
+                    error: () => this.router.navigate(['server-error']),
                 });
             } else {
                 this.http.getProductList().subscribe({
@@ -49,8 +49,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                     error: (err) => {
                         console.log(err);
 
-                        this.router.navigate(['not-found']);
-                    }, //TODO: redirect to 500
+                        this.router.navigate(['server-error']);
+                    },
                 });
             }
         });
