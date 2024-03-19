@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
+
 import { IGetCartResponse } from '../../../../types';
 import { LoaderComponent } from '../../loader/loader.component';
 import { getFutureDate } from '../../../utils';
 import { GetDecimalPartPipe } from '../../../pipes/get-decimal-part.pipe';
 import { GetWholePricePipe } from '../../../pipes/get-whole-price.pipe';
+import { HttpService } from '../../../../core/services/http.service';
 
 @Component({
     selector: 'app-cart-table',
@@ -18,8 +20,27 @@ export class CartTableComponent {
 
     dateAfterFourDays = getFutureDate(4);
 
+    constructor(private http: HttpService) {}
+
     calculateTotalPricePerProduct(productPrice: string, productCount: number) {
         const sum = Number(productPrice) * productCount;
-        return String(sum);
+        return String(sum.toFixed(2));
+    }
+
+    decreaseProductCount(id: number) {
+        const product = this.cart?.filter(
+            (product) => product.product.id === id,
+        );
+        if (product) {
+            product[0].count--;
+        }
+
+        this.http.decreaseProductCountFromCart(id).subscribe({
+            error: () => {
+                if (product) {
+                    product[0].count++;
+                }
+            },
+        });
     }
 }

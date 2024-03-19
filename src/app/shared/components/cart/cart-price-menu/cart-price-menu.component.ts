@@ -16,6 +16,6 @@ export class CartPriceMenuComponent {
         this.cart?.forEach((product) => {
             sum += Number(product.product.price) * product.count;
         });
-        return sum;
+        return sum.toFixed(2);
     }
 }
