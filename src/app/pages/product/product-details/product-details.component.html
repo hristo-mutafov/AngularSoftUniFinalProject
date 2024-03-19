@@ -92,12 +92,10 @@
                         <p>Price Protection</p>
                     </div>
                     <p class="price_desc">The price includes VAT.</p>
-                    <form method="post">
-                        <button id="buyBtn" class="btn buy_btn">
-                            <i class="fas fa-shopping-cart"></i>
-                            Buy
-                        </button>
-                    </form>
+                    <button (click)="buy()" id="buyBtn" class="btn buy_btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        Buy
+                    </button>
                 </div>
                 <div class="add_to">
                     @if (product?.in_favorites) {

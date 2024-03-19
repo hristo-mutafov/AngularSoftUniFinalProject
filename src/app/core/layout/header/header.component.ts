@@ -1,8 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { AuthStateService } from '../../state/auth-state.service';
 import { Subscription } from 'rxjs';
+import { AuthStateService } from '../../state/auth-state.service';
 import { CartStateService } from '../../state/cart-state.service';
 
 @Component({

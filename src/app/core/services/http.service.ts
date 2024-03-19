@@ -104,4 +104,8 @@ export class HttpService {
             {},
         );
     }
+
+    addToCart(id: number) {
+        return this.http.patch(`/api/cart/add/${id}`, {});
+    }
 }

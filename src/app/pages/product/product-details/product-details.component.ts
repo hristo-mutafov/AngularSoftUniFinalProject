@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { IProductDetail } from '../../../types';
 import { HttpService } from '../../../core/services/http.service';
+import { AuthStateService } from '../../../core/state/auth-state.service';
+import { CartStateService } from '../../../core/state/cart-state.service';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
-import { getFutureDate } from '../../../shared/utils';
 import { GetDecimalPartPipe } from '../../../shared/pipes/get-decimal-part.pipe';
 import { GetWholePricePipe } from '../../../shared/pipes/get-whole-price.pipe';
 import { AddToFavoritesService } from '../../../shared/services/add-to-favorites.service';
+import { getFutureDate } from '../../../shared/utils';
+import { IProductDetail } from '../../../types';
 
 @Component({
     selector: 'app-product-details',
@@ -29,6 +31,8 @@ export class ProductDetailsComponent {
         private http: HttpService,
         private router: Router,
         private favoritesService: AddToFavoritesService,
+        private authState: AuthStateService,
+        private cartState: CartStateService,
     ) {
         this.product_id = Number(this.route.snapshot.params['id']);
 
@@ -48,5 +52,22 @@ export class ProductDetailsComponent {
             this.product!,
             this.product_id!,
         );
+    }
+
+    buy() {
+        if (!this.authState.isAuthenticated()) {
+            this.router.navigate(['auth/login']);
+            return;
+        }
+
+        this.http.addToCart(this.product_id!).subscribe({
+            next: () => {
+                this.cartState.increment();
+            },
+            error: () => {
+                this.cartState.decrement();
+                this.router.navigate(['server-error']);
+            },
+        });
     }
 }
