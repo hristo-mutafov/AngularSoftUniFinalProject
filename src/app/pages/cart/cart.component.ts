@@ -9,11 +9,21 @@ import { GetWholePricePipe } from '../../shared/pipes/get-whole-price.pipe';
 import { GetDecimalPartPipe } from '../../shared/pipes/get-decimal-part.pipe';
 import { getFutureDate } from '../../shared/utils';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { EmptyCartComponent } from '../../shared/components/cart/empty-cart/empty-cart.component';
+import { CartTableComponent } from '../../shared/components/cart/cart-table/cart-table.component';
+import { CartPriceMenuComponent } from '../../shared/components/cart/cart-price-menu/cart-price-menu.component';
 
 @Component({
     selector: 'app-cart',
     standalone: true,
-    imports: [GetWholePricePipe, GetDecimalPartPipe, LoaderComponent],
+    imports: [
+        GetWholePricePipe,
+        GetDecimalPartPipe,
+        LoaderComponent,
+        EmptyCartComponent,
+        CartTableComponent,
+        CartPriceMenuComponent,
+    ],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.css',
 })
@@ -43,18 +53,5 @@ export class CartComponent implements OnInit {
                 },
                 error: () => this.router.navigate(['server-error']),
             });
-    }
-
-    calculateTotalPrice() {
-        let sum = 0;
-        this.cart?.forEach((product) => {
-            sum += Number(product.product.price) * product.count;
-        });
-        return sum;
-    }
-
-    calculateTotalPricePerProduct(productPrice: string, productCount: number) {
-        const sum = Number(productPrice) * productCount;
-        return String(sum);
     }
 }

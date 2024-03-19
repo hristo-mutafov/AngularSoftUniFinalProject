@@ -1,0 +1,17 @@
+<div class="price_menu">
+    <div class="subtotal_price_wrapper">
+        <p class="label">Subtotal price:</p>
+        <p id="subtotal_price" class="subtotal">
+            {{ calculateTotalPrice() }}lv.
+        </p>
+    </div>
+    <div class="total_price_wrapper">
+        <p class="label">Total Price:</p>
+        <p id="total_price" class="total">{{ calculateTotalPrice() }}lv.</p>
+    </div>
+    <a
+        ><button id="go_to_finish_btn" class="to_finish_btn">
+            Go to Finish
+        </button></a
+    >
+</div>
