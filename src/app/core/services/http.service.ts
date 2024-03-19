@@ -5,6 +5,7 @@ import { catchError, retry, tap, throwError } from 'rxjs';
 import {
     IAuthResponse,
     IFavoritesList,
+    IProductDetail,
     IProductList,
     IProfile,
     IRefreshTokenResponse,
@@ -75,5 +76,14 @@ export class HttpService {
 
     getFavoriteProducts() {
         return this.http.get<IFavoritesList>('/api/favorites');
+    }
+
+    getProduct(id: number) {
+        return this.http.get<IProductDetail>(`/api/get/product/${id}`).pipe(
+            retry(ERROR_RETRY_TIMES),
+            catchError((err: HttpErrorResponse) => {
+                return throwError(err);
+            }),
+        );
     }
 }

@@ -1,23 +1,43 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { IProductDetail } from '../../../types';
+import { HttpService } from '../../../core/services/http.service';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { getFutureDate } from '../../../shared/utils';
+import { GetDecimalPartPipe } from '../../../shared/pipes/get-decimal-part.pipe';
+import { GetWholePricePipe } from '../../../shared/pipes/get-whole-price.pipe';
 
 @Component({
     selector: 'app-product-details',
     standalone: true,
-    imports: [],
+    imports: [LoaderComponent, GetDecimalPartPipe, GetWholePricePipe],
     templateUrl: './product-details.component.html',
     styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent {
-    // TODO: Mock Data:
-    product = {
-        image: 'https://t4.ftcdn.net/jpg/00/53/45/31/360_F_53453175_hVgYVz0WmvOXPd9CNzaUcwcibiGao3CL.jpg',
-        brand: 'Nike',
-        category: {
-            name: 'Demo',
-        },
-        made_in: 'China',
-        description: 'No desc.',
-    };
-    date_after_two_days = '12.03.24';
-    date_after_four_days = '14.03.24';
+    private product_id: number | null = null;
+
+    isLoading = true;
+    product: IProductDetail | null = null;
+    date_after_two_days = getFutureDate(2);
+    date_after_four_days = getFutureDate(4);
+
+    constructor(
+        private route: ActivatedRoute,
+        private http: HttpService,
+        private router: Router,
+    ) {
+        this.product_id = Number(this.route.snapshot.params['id']);
+
+        this.http.getProduct(this.product_id).subscribe({
+            next: (product) => {
+                this.product = product;
+                this.isLoading = false;
+            },
+            error: () => {
+                this.router.navigate(['not-found']);
+            },
+        });
+    }
 }
