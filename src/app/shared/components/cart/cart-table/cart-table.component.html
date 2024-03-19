@@ -69,7 +69,13 @@
                             <p class="product_count">
                                 {{ product.count }}
                             </p>
-                            <button id="increase_btn" class="increase_btn">
+                            <button
+                                (click)="
+                                    increaseProductCount(product.product.id)
+                                "
+                                id="increase_btn"
+                                class="increase_btn"
+                            >
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>

@@ -51,4 +51,22 @@ export class CartTableComponent {
             },
         });
     }
+
+    increaseProductCount(id: number) {
+        const product = this.cart?.filter(
+            (product) => product.product.id === id,
+        );
+
+        if (product) {
+            product[0].count++;
+        }
+
+        this.http.addToCart(id).subscribe({
+            error: () => {
+                if (product) {
+                    product[0].count--;
+                }
+            },
+        });
+    }
 }
