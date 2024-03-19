@@ -1,6 +1,8 @@
 .header {
     background-color: #1d1d1f;
     width: 100%;
+    position: relative;
+    z-index: 100;
 }
 
 .header .header_wrapper {
