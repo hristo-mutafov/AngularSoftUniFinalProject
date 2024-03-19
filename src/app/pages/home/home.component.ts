@@ -32,6 +32,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (params['favorites'] && this.authState.isAuthenticated()) {
                 this.http.getFavoriteProducts().subscribe({
                     next: (products) => {
+                        products[0].products.forEach(
+                            (product) => (product.in_favorites = true),
+                        );
                         this.isLoading = false;
                         this.products = products[0].products;
                     },
