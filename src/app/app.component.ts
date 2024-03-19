@@ -7,11 +7,12 @@ import { HttpService } from './core/services/http.service';
 import { TokenService } from './core/services/token.service';
 import { AuthStateService } from './core/state/auth-state.service';
 import { isTokenExpired } from './shared/validators/jwt.validator';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, HeaderComponent, FooterComponent],
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, LoaderComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
 })
