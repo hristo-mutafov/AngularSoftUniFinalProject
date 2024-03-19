@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
         } else if (!tokenExpired) {
             this.authState.authenticate();
             this.getProfile();
+            this.getCart();
         } else {
             this.tokenService.removeTokens();
             this.loading = false;
@@ -54,6 +55,7 @@ export class AppComponent implements OnInit {
             next: () => {
                 this.authState.authenticate();
                 this.getProfile();
+                this.getCart();
             },
             error: () => (this.loading = false),
         });
@@ -67,5 +69,9 @@ export class AppComponent implements OnInit {
             },
             error: () => (this.loading = false),
         });
+    }
+
+    private getCart() {
+        this.http.getCart().subscribe();
     }
 }

@@ -5,6 +5,7 @@ import { catchError, retry, tap, throwError } from 'rxjs';
 import {
     IAuthResponse,
     IFavoritesList,
+    IGetCartResponse,
     IProductDetail,
     IProductList,
     IProfile,
@@ -13,6 +14,7 @@ import {
 } from '../../types';
 import { TokenService } from './token.service';
 import { ERROR_RETRY_TIMES } from '../../shared/constants';
+import { CartStateService } from '../state/cart-state.service';
 
 interface ISuccessWithMessage {
     message: string;
@@ -25,6 +27,7 @@ export class HttpService {
     constructor(
         private http: HttpClient,
         private tokenService: TokenService,
+        private cartState: CartStateService,
     ) {}
 
     register(email: string, password: string) {
@@ -107,5 +110,17 @@ export class HttpService {
 
     addToCart(id: number) {
         return this.http.patch(`/api/cart/add/${id}`, {});
+    }
+
+    getCart() {
+        return this.http.get<IGetCartResponse>('/api/cart/products').pipe(
+            tap((result) => {
+                let allCartProductsCount = 0;
+                result.forEach((cartProduct) => {
+                    allCartProductsCount += cartProduct.count;
+                });
+                this.cartState.updateCartCount(allCartProductsCount);
+            }),
+        );
     }
 }

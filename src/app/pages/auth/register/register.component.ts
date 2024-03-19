@@ -38,6 +38,7 @@ export class RegisterComponent {
                     this.authState.setProfileFromServer(profile);
                     this.router.navigate(['home']);
                 });
+                this.api.getCart().subscribe();
             },
             error: (err) => {
                 const status = err.status;
