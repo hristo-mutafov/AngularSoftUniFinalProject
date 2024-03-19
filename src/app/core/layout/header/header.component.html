@@ -21,9 +21,9 @@
                         ><i class="fas fa-shopping-cart"></i
                     ></a>
 
-                    <!-- If there are products in the cart -->
-                    <!-- <p id="cartItemsCount">{{ cart_products_count }}</p> -->
-                    <p id="cartItemsCount"></p>
+                    @if (cartCount > 0) {
+                        <p id="cartItemsCount">{{ cartCount }}</p>
+                    }
                 </li>
 
                 @if (isStaff) {

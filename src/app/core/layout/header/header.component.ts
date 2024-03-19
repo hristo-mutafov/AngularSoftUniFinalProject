@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { AuthStateService } from '../../state/auth-state.service';
 import { Subscription } from 'rxjs';
+import { CartStateService } from '../../state/cart-state.service';
 
 @Component({
     selector: 'app-header',
@@ -12,14 +13,17 @@ import { Subscription } from 'rxjs';
     styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    //TODO: Implement cart count
     isBurgerClicked = false;
 
     isAuthenticated = false;
     isStaff = false;
+    cartCount = 0;
     subscriptions: Subscription[] = [];
 
-    constructor(private authState: AuthStateService) {}
+    constructor(
+        private authState: AuthStateService,
+        private cartState: CartStateService,
+    ) {}
 
     ngOnInit(): void {
         this.subscriptions.push(
@@ -30,6 +34,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
             this.authState.isStaff$().subscribe((state) => {
                 this.isStaff = state;
+            }),
+        );
+        this.subscriptions.push(
+            this.cartState.cartCount$.subscribe((count) => {
+                this.cartCount = count;
             }),
         );
     }
