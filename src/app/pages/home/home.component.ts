@@ -6,17 +6,19 @@ import { HttpService } from '../../core/services/http.service';
 import { IProductList } from '../../types';
 import { Subscription } from 'rxjs';
 import { AuthStateService } from '../../core/state/auth-state.service';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ProductListComponent],
+    imports: [ProductListComponent, LoaderComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit, OnDestroy {
     products: IProductList | null = null;
     subscription: Subscription | null = null;
+    isLoading = true;
 
     constructor(
         private http: HttpService,
@@ -30,13 +32,17 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (params['favorites'] && this.authState.isAuthenticated()) {
                 this.http.getFavoriteProducts().subscribe({
                     next: (products) => {
+                        this.isLoading = false;
                         this.products = products[0].products;
                     },
                     error: () => this.router.navigate(['not-found']), //TODO: redirect to 500
                 });
             } else {
                 this.http.getProductList().subscribe({
-                    next: (products) => (this.products = products),
+                    next: (products) => {
+                        this.isLoading = false;
+                        this.products = products;
+                    },
                     error: (err) => {
                         console.log(err);
 

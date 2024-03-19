@@ -12,6 +12,9 @@
             <button class="submit_button"><i class="fas fa-search"></i></button>
         </form>
     </div>
-
-    <app-product-list [products]="products" />
+    @if (isLoading) {
+        <app-loader class="loader" />
+    } @else {
+        <app-product-list [products]="products" />
+    }
 </main>
