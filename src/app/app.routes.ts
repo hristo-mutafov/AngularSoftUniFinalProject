@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { isAuthenticatedGuard } from './core/guards/is-authenticated.guard';
 import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NotFoundPageComponent } from './pages/not-found/not-found-page.component';
+import { ServerErrorPageComponent } from './pages/server-error/server-error-page.component';
 
 export const routes: Routes = [
     {
@@ -45,7 +46,11 @@ export const routes: Routes = [
     },
     {
         path: 'not-found',
-        component: NotFoundComponent,
+        component: NotFoundPageComponent,
+    },
+    {
+        path: 'server-error',
+        component: ServerErrorPageComponent,
     },
     {
         path: '**',
