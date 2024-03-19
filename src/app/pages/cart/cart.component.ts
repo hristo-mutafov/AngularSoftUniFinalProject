@@ -1,22 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../core/services/http.service';
+import { IGetCartResponse } from '../../types';
+import { catchError, retry, throwError } from 'rxjs';
+import { ERROR_RETRY_TIMES } from '../../shared/constants';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { GetWholePricePipe } from '../../shared/pipes/get-whole-price.pipe';
+import { GetDecimalPartPipe } from '../../shared/pipes/get-decimal-part.pipe';
+import { getFutureDate } from '../../shared/utils';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-cart',
     standalone: true,
-    imports: [],
+    imports: [GetWholePricePipe, GetDecimalPartPipe, LoaderComponent],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.css',
 })
-export class CartComponent {
-    // TODO: Mock Data:
-    product = {
-        image: 'https://t4.ftcdn.net/jpg/00/53/45/31/360_F_53453175_hVgYVz0WmvOXPd9CNzaUcwcibiGao3CL.jpg',
-        name: 'T-Shirt',
-        brand: 'Nike',
-        price: 22.2,
-        count: 1,
-    };
+export class CartComponent implements OnInit {
+    isLoading = true;
+    cart: IGetCartResponse | null = null;
+    dateAfterFourDays = getFutureDate(4);
 
-    total_price = 22.2;
-    overall_products_price = 22.2;
+    constructor(
+        private http: HttpService,
+        private router: Router,
+    ) {}
+
+    ngOnInit(): void {
+        this.http
+            .getCart()
+            .pipe(
+                retry(ERROR_RETRY_TIMES),
+                catchError((err: HttpErrorResponse) => {
+                    return throwError(err);
+                }),
+            )
+            .subscribe({
+                next: (cart) => {
+                    this.isLoading = false;
+                    this.cart = cart;
+                },
+                error: () => this.router.navigate(['server-error']),
+            });
+    }
+
+    calculateTotalPrice() {
+        let sum = 0;
+        this.cart?.forEach((product) => {
+            sum += Number(product.product.price) * product.count;
+        });
+        return sum;
+    }
+
+    calculateTotalPricePerProduct(productPrice: string, productCount: number) {
+        const sum = Number(productPrice) * productCount;
+        return String(sum);
+    }
 }

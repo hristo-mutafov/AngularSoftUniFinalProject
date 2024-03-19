@@ -1,11 +1,13 @@
 <main class="cart_page" id="main">
-    <!-- {% if not products %}
+    @if (!cart) {
         <section class="empty_cart active">
             <h1 id="empty_cart_heading">YOUR CART IS EMPTY</h1>
             <p id="empty_cart_desc">Add product to cart before proceeding.</p>
-            <a href="{% url 'index' %}" id="empty_cart_refirect_button">Go To Home Page</a>
+            <a href="{% url 'index' %}" id="empty_cart_refirect_button"
+                >Go To Home Page</a
+            >
         </section>
-    {% else %} -->
+    }
     <section class="main_section">
         <table class="table">
             <thead>
@@ -18,90 +20,116 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-                <!-- {% for product in products %} -->
-                <tr>
-                    <td class="image_and_desc">
-                        <img
-                            id="product_image"
-                            src="{{ product.image }}"
-                            alt="product"
-                        />
-                        <div class="wrapper">
-                            <p id="product_name" class="product_name">
-                                {{ product.name }}
-                            </p>
-                            <div class="brand_wrapper">
-                                <p class="brand_label">Brand:</p>
-                                <p id="product_brand" class="brand">
-                                    {{ product.brand }}
-                                </p>
-                            </div>
-                            <p class="delivery_date">
-                                Delivery on
-                                <span
-                                    id="product_delivery_date"
-                                    class="colored"
-                                ></span>
-                            </p>
-                        </div>
-                    </td>
-                    <td id="single_price_sec">
-                        <span id="priceDesign" class="price">
-                            <span id="bigPrice" class="whole">{{
-                                product.price
-                            }}</span>
-                            <span id="smallPrice" class="cents"
-                                >{{ product.price }}
-                            </span>
-                            <span class="currency"> lv. </span>
-                        </span>
-                    </td>
-                    <td>
-                        <div class="count_wrapper">
-                            <button id="decrease_btn" class="decrease_btn">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <p class="product_count">{{ product.count }}</p>
-                            <button id="increase_btn" class="increase_btn">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td id="total_price_sec">
-                        <!-- {% get_whole_price product.price product.count as total_price %} -->
-                        <span id="priceDesign" class="price">
-                            <span id="bigPrice" class="whole">{{
-                                total_price
-                            }}</span>
-                            <span id="smallPrice" class="cents"
-                                >{{ total_price }}
-                            </span>
-                            <span class="currency"> lv. </span>
-                        </span>
-                    </td>
-                    <td class="remove_item">
-                        <form method="post">
-                            <!-- {% csrf_token %} -->
-                            <button id="remove_item_btn">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <!-- {% endfor %} -->
+                @if (isLoading) {
+                    <tr>
+                        <td colspan="5">
+                            <app-loader class="loader" />
+                        </td>
+                    </tr>
+                } @else {
+                    @for (product of cart; track product.product.id) {
+                        <tr>
+                            <td class="image_and_desc">
+                                <img
+                                    id="product_image"
+                                    src="{{ product.product.image }}"
+                                    alt="product"
+                                />
+                                <div class="wrapper">
+                                    <p id="product_name" class="product_name">
+                                        {{ product.product.name }}
+                                    </p>
+                                    <div class="brand_wrapper">
+                                        <p class="brand_label">Brand:</p>
+                                        <p id="product_brand" class="brand">
+                                            {{ product.product.brand }}
+                                        </p>
+                                    </div>
+                                    <p class="delivery_date">
+                                        Delivery on
+                                        <span
+                                            id="product_delivery_date"
+                                            class="colored"
+                                            >{{ dateAfterFourDays }}</span
+                                        >
+                                    </p>
+                                </div>
+                            </td>
+                            <td id="single_price_sec">
+                                <span id="priceDesign" class="price">
+                                    <span id="bigPrice" class="whole">{{
+                                        product.product.price | wholePrice
+                                    }}</span>
+                                    <span id="smallPrice" class="cents"
+                                        >{{
+                                            product.product.price | decimalPrice
+                                        }}
+                                    </span>
+                                    <span class="currency"> lv. </span>
+                                </span>
+                            </td>
+                            <td>
+                                <div class="count_wrapper">
+                                    <button
+                                        id="decrease_btn"
+                                        class="decrease_btn"
+                                    >
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <p class="product_count">
+                                        {{ product.count }}
+                                    </p>
+                                    <button
+                                        id="increase_btn"
+                                        class="increase_btn"
+                                    >
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td id="total_price_sec">
+                                <!-- {% get_whole_price product.price product.count as total_price %} -->
+                                <span id="priceDesign" class="price">
+                                    <span id="bigPrice" class="whole">{{
+                                        calculateTotalPricePerProduct(
+                                            product.product.price,
+                                            product.count
+                                        ) | wholePrice
+                                    }}</span>
+                                    <span id="smallPrice" class="cents"
+                                        >{{
+                                            calculateTotalPricePerProduct(
+                                                product.product.price,
+                                                product.count
+                                            ) | decimalPrice
+                                        }}
+                                    </span>
+                                    <span class="currency"> lv. </span>
+                                </span>
+                            </td>
+                            <td class="remove_item">
+                                <form method="post">
+                                    <button id="remove_item_btn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
         <div class="price_menu">
             <div class="subtotal_price_wrapper">
                 <p class="label">Subtotal price:</p>
                 <p id="subtotal_price" class="subtotal">
-                    {{ overall_products_price }}lv.
+                    {{ calculateTotalPrice() }}lv.
                 </p>
             </div>
             <div class="total_price_wrapper">
                 <p class="label">Total Price:</p>
                 <p id="total_price" class="total">
-                    {{ overall_products_price }}lv.
+                    {{ calculateTotalPrice() }}lv.
                 </p>
             </div>
             <a

@@ -192,6 +192,13 @@
     border-color: red;
 }
 
+.loader {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 30px auto;
+}
+
 @media screen and (max-width: 1040px) {
     #main.cart_page .main_section {
         grid-template-columns: 100%;
