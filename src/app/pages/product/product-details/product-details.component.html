@@ -101,12 +101,18 @@
                 </div>
                 <div class="add_to">
                     @if (product?.in_favorites) {
-                        <div class="add_to_favorites">
+                        <div
+                            (click)="handleAddToFavoritesButton()"
+                            class="add_to_favorites"
+                        >
                             <i id="icon" class="fas fa-heart"></i>
                             <p>Add to favorites</p>
                         </div>
                     } @else {
-                        <div class="add_to_favorites">
+                        <div
+                            (click)="handleAddToFavoritesButton()"
+                            class="add_to_favorites"
+                        >
                             <i id="icon" class="far fa-heart"></i>
                             <p>Add to favorites</p>
                         </div>

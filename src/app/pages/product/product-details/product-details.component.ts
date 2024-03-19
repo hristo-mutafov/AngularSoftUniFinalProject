@@ -7,6 +7,7 @@ import { LoaderComponent } from '../../../shared/components/loader/loader.compon
 import { getFutureDate } from '../../../shared/utils';
 import { GetDecimalPartPipe } from '../../../shared/pipes/get-decimal-part.pipe';
 import { GetWholePricePipe } from '../../../shared/pipes/get-whole-price.pipe';
+import { AuthStateService } from '../../../core/state/auth-state.service';
 
 @Component({
     selector: 'app-product-details',
@@ -27,6 +28,7 @@ export class ProductDetailsComponent {
         private route: ActivatedRoute,
         private http: HttpService,
         private router: Router,
+        private authState: AuthStateService,
     ) {
         this.product_id = Number(this.route.snapshot.params['id']);
 
@@ -37,6 +39,41 @@ export class ProductDetailsComponent {
             },
             error: () => {
                 this.router.navigate(['not-found']);
+            },
+        });
+    }
+
+    handleAddToFavoritesButton() {
+        if (!this.authState.isAuthenticated()) {
+            this.router.navigate(['auth/login']);
+            return;
+        }
+        try {
+            this.product!.in_favorites = !this.product!.in_favorites;
+        } catch {
+            this.router.navigate(['server-error']);
+            return;
+        }
+
+        if (this.product!.in_favorites) {
+            this.addToFavorites();
+        } else {
+            this.removeFromFavorites();
+        }
+    }
+
+    private addToFavorites() {
+        this.http.addToFavorite(this.product_id!).subscribe({
+            error: () => {
+                this.product!.in_favorites = !this.product!.in_favorites;
+            },
+        });
+    }
+
+    private removeFromFavorites() {
+        this.http.removeFromFavorites(this.product_id!).subscribe({
+            error: () => {
+                this.product!.in_favorites = !this.product!.in_favorites;
             },
         });
     }

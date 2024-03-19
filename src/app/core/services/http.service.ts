@@ -14,6 +14,10 @@ import {
 import { TokenService } from './token.service';
 import { ERROR_RETRY_TIMES } from '../../shared/constants';
 
+interface ISuccessWithMessage {
+    message: string;
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -51,11 +55,11 @@ export class HttpService {
     }
 
     updateProfile(data: IUpdateProfileData) {
-        return this.http.patch<{ message: string }>('/api/user', data);
+        return this.http.patch<ISuccessWithMessage>('/api/user', data);
     }
 
     validatePassword(password: string) {
-        return this.http.post<{ message: string }>(
+        return this.http.post<ISuccessWithMessage>(
             '/api/user/validate_password',
             { password },
         );
@@ -84,6 +88,20 @@ export class HttpService {
             catchError((err: HttpErrorResponse) => {
                 return throwError(err);
             }),
+        );
+    }
+
+    addToFavorite(id: number) {
+        return this.http.patch<ISuccessWithMessage>(
+            `/api/favorites/add/${id}`,
+            {},
+        );
+    }
+
+    removeFromFavorites(id: number) {
+        return this.http.patch<ISuccessWithMessage>(
+            `/api/favorites/remove/${id}`,
+            {},
         );
     }
 }
