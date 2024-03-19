@@ -137,4 +137,8 @@ export class HttpService {
             ),
         );
     }
+
+    removeFromCart(id: number) {
+        return this.http.patch(`/api/cart/remove/${id}`, {});
+    }
 }

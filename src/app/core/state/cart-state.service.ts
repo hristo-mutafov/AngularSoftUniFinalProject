@@ -31,6 +31,10 @@ export class CartStateService implements OnDestroy {
         this._cartCount$$.next(count);
     }
 
+    decreaseCount(count: number) {
+        this._cartCount$$.next(this._currentCount - count);
+    }
+
     ngOnDestroy(): void {
         this.subscription?.unsubscribe();
     }

@@ -100,11 +100,12 @@
                         </span>
                     </td>
                     <td class="remove_item">
-                        <form method="post">
-                            <button id="remove_item_btn">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </form>
+                        <button
+                            (click)="removeProduct(product.product.id)"
+                            id="remove_item_btn"
+                        >
+                            <i class="fas fa-times"></i>
+                        </button>
                     </td>
                 </tr>
             }

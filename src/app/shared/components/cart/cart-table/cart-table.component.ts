@@ -6,6 +6,7 @@ import { getFutureDate } from '../../../utils';
 import { GetDecimalPartPipe } from '../../../pipes/get-decimal-part.pipe';
 import { GetWholePricePipe } from '../../../pipes/get-whole-price.pipe';
 import { HttpService } from '../../../../core/services/http.service';
+import { CartStateService } from '../../../../core/state/cart-state.service';
 
 @Component({
     selector: 'app-cart-table',
@@ -20,7 +21,10 @@ export class CartTableComponent {
 
     dateAfterFourDays = getFutureDate(4);
 
-    constructor(private http: HttpService) {}
+    constructor(
+        private http: HttpService,
+        private cartState: CartStateService,
+    ) {}
 
     calculateTotalPricePerProduct(productPrice: string, productCount: number) {
         const sum = Number(productPrice) * productCount;
@@ -28,16 +32,11 @@ export class CartTableComponent {
     }
 
     decreaseProductCount(id: number) {
-        const product = this.cart?.filter(
-            (product) => product.product.id === id,
-        );
+        const product = this.getProduct(id);
 
         if (product) {
             if (product[0].count === 1) {
-                const index = this.cart?.findIndex(
-                    (product) => product.product.id === id,
-                );
-                this.cart?.splice(index!, 1);
+                this.removeProductFromCart(id);
             } else {
                 product[0].count--;
             }
@@ -53,9 +52,7 @@ export class CartTableComponent {
     }
 
     increaseProductCount(id: number) {
-        const product = this.cart?.filter(
-            (product) => product.product.id === id,
-        );
+        const product = this.getProduct(id);
 
         if (product) {
             product[0].count++;
@@ -68,5 +65,30 @@ export class CartTableComponent {
                 }
             },
         });
+    }
+
+    removeProduct(id: number) {
+        const product = this.getProduct(id);
+
+        this.http.removeFromCart(id).subscribe({
+            next: () => {
+                this.cartState.decreaseCount(product![0].count);
+                this.removeProductFromCart(id);
+            },
+            error: () => {
+                this.cart?.push(product![0]);
+            },
+        });
+    }
+
+    private getProduct(id: number) {
+        return this.cart?.filter((product) => product.product.id === id);
+    }
+
+    private removeProductFromCart(id: number) {
+        const index = this.cart?.findIndex(
+            (product) => product.product.id === id,
+        );
+        this.cart?.splice(index!, 1);
     }
 }
