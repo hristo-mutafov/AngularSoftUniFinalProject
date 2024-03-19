@@ -1,7 +1,7 @@
 <section class="products_wrapper">
     @if (products) {
         @for (product of products; track product.id) {
-            <div class="product">
+            <div [routerLink]="['/product/', product.id]" class="product">
                 <img src="{{ product.image }}" alt="" class="image" />
                 <div class="data_section">
                     <div class="text_container">
