@@ -1,9 +1,10 @@
 <main class="cart_page" id="main">
-    @if (!cart || !cart.length) {
+    @if (!cart?.length && !isLoading) {
         <app-empty-cart />
+    } @else {
+        <section class="main_section">
+            <app-cart-table [isLoading]="isLoading" [cart]="cart" />
+            <app-cart-price-menu [cart]="cart" />
+        </section>
     }
-    <section class="main_section">
-        <app-cart-table [isLoading]="isLoading" [cart]="cart" />
-        <app-cart-price-menu [cart]="cart" />
-    </section>
 </main>
