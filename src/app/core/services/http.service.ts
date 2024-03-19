@@ -128,4 +128,13 @@ export class HttpService {
             }),
         );
     }
+
+    decreaseProductCountFromCart(id: number) {
+        return this.http.patch(`/api/cart/substract/${id}`, {}).pipe(
+            tap(
+                () => this.cartState.decrement(),
+                catchError((err: HttpErrorResponse) => throwError(err)),
+            ),
+        );
+    }
 }

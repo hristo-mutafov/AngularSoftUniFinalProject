@@ -57,7 +57,13 @@
                     </td>
                     <td>
                         <div class="count_wrapper">
-                            <button id="decrease_btn" class="decrease_btn">
+                            <button
+                                (click)="
+                                    decreaseProductCount(product.product.id)
+                                "
+                                id="decrease_btn"
+                                class="decrease_btn"
+                            >
                                 <i class="fas fa-minus"></i>
                             </button>
                             <p class="product_count">

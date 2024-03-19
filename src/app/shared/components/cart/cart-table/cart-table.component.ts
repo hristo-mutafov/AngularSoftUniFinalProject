@@ -31,8 +31,16 @@ export class CartTableComponent {
         const product = this.cart?.filter(
             (product) => product.product.id === id,
         );
+
         if (product) {
-            product[0].count--;
+            if (product[0].count === 1) {
+                const index = this.cart?.findIndex(
+                    (product) => product.product.id === id,
+                );
+                this.cart?.splice(index!, 1);
+            } else {
+                product[0].count--;
+            }
         }
 
         this.http.decreaseProductCountFromCart(id).subscribe({
