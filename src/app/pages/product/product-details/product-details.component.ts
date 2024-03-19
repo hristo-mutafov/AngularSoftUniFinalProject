@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpService } from '../../../core/services/http.service';
 import { AuthStateService } from '../../../core/state/auth-state.service';
-import { CartStateService } from '../../../core/state/cart-state.service';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { GetDecimalPartPipe } from '../../../shared/pipes/get-decimal-part.pipe';
 import { GetWholePricePipe } from '../../../shared/pipes/get-whole-price.pipe';
@@ -32,7 +31,6 @@ export class ProductDetailsComponent {
         private router: Router,
         private favoritesService: AddToFavoritesService,
         private authState: AuthStateService,
-        private cartState: CartStateService,
     ) {
         this.product_id = Number(this.route.snapshot.params['id']);
 
@@ -61,11 +59,7 @@ export class ProductDetailsComponent {
         }
 
         this.http.addToCart(this.product_id!).subscribe({
-            next: () => {
-                this.cartState.increment();
-            },
             error: () => {
-                this.cartState.decrement();
                 this.router.navigate(['server-error']);
             },
         });

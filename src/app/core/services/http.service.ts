@@ -109,7 +109,12 @@ export class HttpService {
     }
 
     addToCart(id: number) {
-        return this.http.patch(`/api/cart/add/${id}`, {});
+        return this.http.patch(`/api/cart/add/${id}`, {}).pipe(
+            tap(
+                () => this.cartState.increment(),
+                catchError((err: HttpErrorResponse) => throwError(err)),
+            ),
+        );
     }
 
     getCart() {
