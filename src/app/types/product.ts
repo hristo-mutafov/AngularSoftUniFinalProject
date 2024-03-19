@@ -8,3 +8,5 @@ interface IProduct {
 }
 
 export type IProductList = IProduct[];
+
+export type IFavoritesList = [{ products: IProduct[] }];
