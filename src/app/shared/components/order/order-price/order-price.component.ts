@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-order-price',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
     templateUrl: './order-price.component.html',
     styleUrl: './order-price.component.css',
 })
-export class OrderPriceComponent {}
+export class OrderPriceComponent {
+    @Output() finishOrder = new EventEmitter();
+
+    buttonHandler() {
+        this.finishOrder.emit();
+    }
+}

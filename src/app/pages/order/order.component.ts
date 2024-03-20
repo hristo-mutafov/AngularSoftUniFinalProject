@@ -16,4 +16,8 @@ import { OrderPriceComponent } from '../../shared/components/order/order-price/o
     templateUrl: './order.component.html',
     styleUrl: './order.component.css',
 })
-export class OrderComponent {}
+export class OrderComponent {
+    finishOrder() {
+        console.log('button pressed');
+    }
+}
