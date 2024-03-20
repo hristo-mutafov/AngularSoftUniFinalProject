@@ -58,6 +58,10 @@
     font-size: 20px;
 }
 
+.wrong {
+    border-color: red;
+}
+
 @media screen and (max-width: 800px) {
     .method .main {
         grid-template-columns: 100%;

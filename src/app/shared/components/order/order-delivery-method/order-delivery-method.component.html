@@ -4,9 +4,20 @@
         <h2 class="section_heading">Delivery method</h2>
     </div>
     <div class="main">
-        <form id="deliveryMethodForm" class="method_form">
+        <form
+            #form="ngForm"
+            id="deliveryMethodForm"
+            class="method_form"
+            (change)="submitDeliveryMethodOption(form)"
+        >
             <div class="element">
-                <input id="dhl_delivery" type="radio" name="delivery_method" />
+                <input
+                    id="dhl_delivery"
+                    type="radio"
+                    name="delivery_method"
+                    value="dhl_delivery"
+                    ngModel
+                />
                 <label for="dhl_delivery">
                     <div class="delivery_label">
                         <i class="fas fa-warehouse"></i>
@@ -21,7 +32,13 @@
             </div>
 
             <div class="element">
-                <input id="fast_dhl" type="radio" name="delivery_method" />
+                <input
+                    id="fast_dhl"
+                    type="radio"
+                    name="delivery_method"
+                    value="fast_dhl"
+                    ngModel
+                />
                 <label for="fast_dhl" class="fast_dhl">
                     <div class="delivery_label">
                         <i class="fas fa-shipping-fast"></i>
@@ -39,7 +56,8 @@
                     id="to_address"
                     type="radio"
                     name="delivery_method"
-                    checked
+                    value="to_address"
+                    ngModel
                 />
                 <label for="to_address" class="address">
                     <div class="delivery_label">
@@ -56,33 +74,71 @@
         </form>
         <div class="data">
             <h2 class="heading">WE WILL DELIVER YOUR SHIPMENT TO</h2>
-            <div class="field_wrapper">
-                <label for="name_field" class="name_label"
-                    >First and Last names*:</label
-                >
-                <input
-                    placeholder="Ivan Georgiev"
-                    type="text"
-                    id="name_field"
-                />
-            </div>
-            <div class="field_wrapper">
-                <label for="phone_field" class="phone_label">Phone*:</label>
-                <input placeholder="0888888888" type="phone" id="phone_field" />
-            </div>
-            <div class="field_wrapper">
-                <label
-                    id="addressOrOfficeLabel"
-                    for="address_field"
-                    class="address_label"
-                    >Address*:</label
-                >
-                <input
-                    placeholder="Sofia, ul.Oborishte #24"
-                    type="address"
-                    id="address_field"
-                />
-            </div>
+            <form
+                #form2="ngForm"
+                action=""
+                (change)="submitDeliveryUserInformation(form2)"
+            >
+                <div class="field_wrapper">
+                    <label for="name_field" class="name_label"
+                        >First and Last names*:</label
+                    >
+                    <input
+                        placeholder="Ivan Georgiev"
+                        type="text"
+                        id="name_field"
+                        name="names"
+                        #namesField="ngModel"
+                        ngModel
+                        required
+                        [className]="
+                            namesField.touched && namesField.invalid
+                                ? 'wrong'
+                                : ''
+                        "
+                    />
+                </div>
+                <div class="field_wrapper">
+                    <label for="phone_field" class="phone_label">Phone*:</label>
+                    <input
+                        placeholder="0888888888"
+                        type="phone"
+                        id="phone_field"
+                        name="phoneNumber"
+                        #phoneNumberField="ngModel"
+                        ngModel
+                        required
+                        pattern="[0-9]*"
+                        maxlength="10"
+                        minlength="10"
+                        [className]="
+                            phoneNumberField.touched && phoneNumberField.invalid
+                                ? 'wrong'
+                                : ''
+                        "
+                    />
+                </div>
+                <div class="field_wrapper">
+                    <label
+                        id="addressOrOfficeLabel"
+                        for="address_field"
+                        class="address_label"
+                        >Address*:</label
+                    >
+                    <input
+                        placeholder="Sofia, ul.Oborishte #24"
+                        type="address"
+                        id="address_field"
+                        name="address"
+                        ngModel
+                        #address="ngModel"
+                        required
+                        [className]="
+                            address.touched && address.invalid ? 'wrong' : ''
+                        "
+                    />
+                </div>
+            </form>
         </div>
     </div>
 </section>
