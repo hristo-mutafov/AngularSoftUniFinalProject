@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { getFutureDate } from '../../../utils';
 
 @Component({
     selector: 'app-order-delivery-method',
@@ -9,6 +10,9 @@ import { FormsModule, NgForm } from '@angular/forms';
     styleUrl: '../method-and-payment-common.css',
 })
 export class OrderDeliveryMethodComponent {
+    dateAfterTwoDays = getFutureDate(2);
+    dateAfterFourDays = getFutureDate(4);
+
     submitDeliveryMethodOption(form: NgForm) {
         console.log(form.value);
     }
