@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { IGetCartResponse } from '../../../../types';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-cart-price-menu',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './cart-price-menu.component.html',
     styleUrl: './cart-price-menu.component.css',
 })
