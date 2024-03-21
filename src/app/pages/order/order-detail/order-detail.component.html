@@ -1,0 +1,79 @@
+<main class="orders_page" id="main">
+    <section class="profile_settings">
+        <section class="order_details">
+            <section class="section">
+                <div class="field">
+                    <div class="label">
+                        <i class="far fa-clock"></i>
+                        <p>Date</p>
+                    </div>
+                    <p id="dateField" class="field_data">{{ order?.date }}</p>
+                </div>
+
+                <div class="field">
+                    <div class="label">
+                        <i class="fab fa-slack-hash"></i>
+                        <p>Order Number</p>
+                    </div>
+                    <p id="orderNumber" class="field_data">
+                        {{ order?.order_number }}
+                    </p>
+                </div>
+
+                <div class="field">
+                    <div class="label">
+                        <i class="fas fa-money-bill-alt"></i>
+                        <p>Price</p>
+                    </div>
+                    <p id="orderPrice" class="field_data">{{ order?.price }}</p>
+                </div>
+
+                <div class="field">
+                    <div class="label">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Address</p>
+                    </div>
+                    <p id="orderAddress" class="field_data">
+                        {{ order?.address }}
+                    </p>
+                </div>
+
+                @if (order?.comment) {
+                    <div class="field">
+                        <div class="label">
+                            <i class="fas fa-comment"></i>
+                            <p>Comment</p>
+                        </div>
+                        <p id="orderAddress" class="field_data">
+                            {{ order?.comment }}
+                        </p>
+                    </div>
+                }
+            </section>
+            <section id="productWrapper" class="section"></section>
+            <section class="section">
+                <div class="field">
+                    <div class="label">
+                        <i class="fas fa-wallet"></i>
+                        <p>Payment Method</p>
+                    </div>
+                    <p id="orderPaymentMethod" class="type_payment">
+                        {{ order?.payment_method }}
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="field">
+                    <div class="label">
+                        <i class="fas fa-money-bill-alt"></i>
+                        <p>Price</p>
+                    </div>
+                    <p id="orderPrice2" class="type_payment">
+                        {{ order?.price }}
+                    </p>
+                </div>
+            </section>
+        </section>
+    </section>
+</main>

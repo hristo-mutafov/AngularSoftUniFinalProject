@@ -40,7 +40,14 @@
                             </div>
                         </div>
                         <a
-                            ><button id="viewBtn" class="btn">
+                            ><button
+                                [routerLink]="[
+                                    '/profile/order/',
+                                    order.order_number
+                                ]"
+                                id="viewBtn"
+                                class="btn"
+                            >
                                 <i class="fas fa-eye"></i> View Order
                             </button></a
                         >

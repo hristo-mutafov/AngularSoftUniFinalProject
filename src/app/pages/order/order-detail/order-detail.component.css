@@ -1,0 +1,60 @@
+.order_page {
+    padding: 50px;
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.orders_page .order_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 20px 40px;
+    border: 1px solid lightgrey;
+    box-shadow:
+        rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.orders_page .order_details .section:not(:last-child) {
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.orders_page .order_details .field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.orders_page .order_details .field .label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.orders_page .order_details .product_field {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.orders_page .order_details .product_field img {
+    width: 100px;
+    height: 122px;
+    object-fit: cover;
+}
+
+.orders_page .order_details .product_field .product_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.orders_page .order_details .product_field img .title {
+    font-weight: 600;
+    font-size: 18px;
+}

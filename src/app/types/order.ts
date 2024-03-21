@@ -14,3 +14,12 @@ export interface IUserInformation {
 }
 
 export type IOrderList = IOrder[];
+
+export interface IOrderDetail {
+    order_number: string;
+    date: string;
+    address: string;
+    payment_method: string;
+    price: string;
+    comment?: string;
+}

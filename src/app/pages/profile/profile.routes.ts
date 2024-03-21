@@ -4,6 +4,7 @@ import { ProfileAddressComponent } from './profile-address/profile-address.compo
 import { ProfileOrdersComponent } from './profile-orders/profile-orders.component';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { ProfileComponent } from './profile.component';
+import { OrderDetailComponent } from '../order/order-detail/order-detail.component';
 
 export const profileRoutes: Routes = [
     {
@@ -21,6 +22,10 @@ export const profileRoutes: Routes = [
             {
                 path: 'orders',
                 component: ProfileOrdersComponent,
+            },
+            {
+                path: 'order/:id',
+                component: OrderDetailComponent,
             },
         ],
     },
