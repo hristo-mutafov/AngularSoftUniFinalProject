@@ -30,20 +30,12 @@ export class CartComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.http
-            .getCart()
-            .pipe(
-                retry(ERROR_RETRY_TIMES),
-                catchError((err: HttpErrorResponse) => {
-                    return throwError(err);
-                }),
-            )
-            .subscribe({
-                next: (cart) => {
-                    this.isLoading = false;
-                    this.cart = cart;
-                },
-                error: () => this.router.navigate(['server-error']),
-            });
+        this.http.getCart().subscribe({
+            next: (cart) => {
+                this.isLoading = false;
+                this.cart = cart;
+            },
+            error: () => this.router.navigate(['server-error']),
+        });
     }
 }

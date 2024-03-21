@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,12 @@ import { FormsModule, NgForm } from '@angular/forms';
     styleUrl: './order-comment.component.css',
 })
 export class OrderCommentComponent {
+    @Output() handleCommentChange = new EventEmitter();
+
     submitComment(form: NgForm) {
-        console.log(form.value);
+        const { additional_comment }: { additional_comment: string } =
+            form.value;
+
+        this.handleCommentChange.emit(additional_comment);
     }
 }

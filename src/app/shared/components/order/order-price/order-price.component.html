@@ -6,7 +6,7 @@
     <div class="main">
         <div class="price_wrapper">
             <p class="label">Subtotal</p>
-            <p id="price" class="price">59.99lv</p>
+            <p id="price" class="price">{{ price }}lv</p>
         </div>
         <div class="price_wrapper">
             <p class="label">Delivery</p>
@@ -14,13 +14,14 @@
         </div>
         <div class="price_wrapper total">
             <p class="label">TOTAL:</p>
-            <p id="price" class="price">59.99lv</p>
+            <p id="price" class="price">{{ price }}lv</p>
         </div>
-        <p class="error_message"></p>
+        <p class="error_message">{{ errorMessage }}</p>
         <button
             (click)="buttonHandler()"
             id="finish_order_btn"
             class="finish_order"
+            [disabled]="disabledBuyButton"
         >
             Finish Order
         </button>

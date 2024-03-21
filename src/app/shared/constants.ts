@@ -5,8 +5,8 @@ export const emailRegEx = new RegExp(
 export const ERROR_RETRY_TIMES = 3;
 export const AUTHENTICATION_400 = 'Incorrect Email or Password';
 export const SERVER_ERROR_500 = 'Server Error. Try again later';
-
 export const SAME_EMAIL = 'Type different email than the current one!';
 export const FIELDS_ARE_REQUIRED = 'All fields are required!';
 export const PASSWORD_NOT_MATCH = 'Passwords do not match!';
 export const BLANK_FIELD_MESSAGE = 'Field not filled';
+export const ORDER_400_ERROR = 'Missing fields!';

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IGetCartResponse } from '../../../../types';
 import { RouterLink } from '@angular/router';
+import { calculateTotalPrice } from '../../../utils';
 
 @Component({
     selector: 'app-cart-price-menu',
@@ -13,10 +14,6 @@ export class CartPriceMenuComponent {
     @Input() cart: IGetCartResponse | null = null;
 
     calculateTotalPrice() {
-        let sum = 0;
-        this.cart?.forEach((product) => {
-            sum += Number(product.product.price) * product.count;
-        });
-        return sum.toFixed(2);
+        return calculateTotalPrice(this.cart);
     }
 }

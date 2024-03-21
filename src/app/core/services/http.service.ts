@@ -126,6 +126,10 @@ export class HttpService {
                 });
                 this.cartState.updateCartCount(allCartProductsCount);
             }),
+            retry(ERROR_RETRY_TIMES),
+            catchError((err: HttpErrorResponse) => {
+                return throwError(err);
+            }),
         );
     }
 
@@ -140,5 +144,12 @@ export class HttpService {
 
     removeFromCart(id: number) {
         return this.http.patch(`/api/cart/remove/${id}`, {});
+    }
+
+    createOrder(payment_method: string, address: string) {
+        return this.http.post('/api/orders/create', {
+            address,
+            payment_method,
+        });
     }
 }

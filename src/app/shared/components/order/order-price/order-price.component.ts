@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'app-order-price',
@@ -8,6 +8,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
     styleUrl: './order-price.component.css',
 })
 export class OrderPriceComponent {
+    @Input() disabledBuyButton: boolean | null = null;
+    @Input() price: string | null = null;
+    @Input() errorMessage: string | null = null;
     @Output() finishOrder = new EventEmitter();
 
     buttonHandler() {

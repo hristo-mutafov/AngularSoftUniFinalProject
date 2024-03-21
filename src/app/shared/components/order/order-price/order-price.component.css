@@ -52,6 +52,15 @@
     transition: background-color 250ms;
 }
 
+.main .finish_order:disabled {
+    background-color: gray;
+    cursor: default;
+}
+
+.main .finish_order:disabled:hover {
+    background-color: gray;
+}
+
 .main .finish_order:hover {
     background-color: #00458b;
 }

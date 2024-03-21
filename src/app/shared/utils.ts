@@ -1,3 +1,5 @@
+import { IGetCartResponse } from '../types';
+
 export const getFutureDate = (days: number) => {
     const currentDate = new Date();
 
@@ -10,4 +12,12 @@ export const getFutureDate = (days: number) => {
     const formattedDate = `${day}.${month}.${year}`;
 
     return formattedDate;
+};
+
+export const calculateTotalPrice = (cart: IGetCartResponse | null) => {
+    let sum = 0;
+    cart?.forEach((product) => {
+        sum += Number(product.product.price) * product.count;
+    });
+    return sum.toFixed(2);
 };

@@ -1,9 +1,19 @@
 <main class="order_page" id="main">
-    <app-order-delivery-method />
+    <app-order-delivery-method
+        (handleDeliveryMethodChange)="handleDeliveryMethodChange($event)"
+        (handleUserInformationChange)="handleUserInformationChange($event)"
+    />
     <app-order-payment-method />
     <section class="additional">
-        <app-order-comment />
+        <app-order-comment
+            (handleCommentChange)="handleCommentChange($event)"
+        />
 
-        <app-order-price (finishOrder)="finishOrder()" />
+        <app-order-price
+            (finishOrder)="finishOrder()"
+            [disabledBuyButton]="disabledBuyButton"
+            [price]="price"
+            [errorMessage]="errorMessage"
+        />
     </section>
 </main>
