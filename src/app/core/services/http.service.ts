@@ -6,6 +6,7 @@ import {
     IAuthResponse,
     IFavoritesList,
     IGetCartResponse,
+    IOrderList,
     IProductDetail,
     IProductList,
     IProfile,
@@ -151,5 +152,9 @@ export class HttpService {
             address,
             payment_method,
         });
+    }
+
+    getOrderList() {
+        return this.http.get<IOrderList>('/api/orders/short_list');
     }
 }
