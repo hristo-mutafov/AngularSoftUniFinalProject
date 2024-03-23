@@ -19,7 +19,6 @@ import { CartPriceMenuComponent } from '../../shared/components/cart/cart-price-
     styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
-    // TODO: Check if empty cart works
     isLoading = true;
     cart: IGetCartResponse | null = null;
     dateAfterFourDays = getFutureDate(4);

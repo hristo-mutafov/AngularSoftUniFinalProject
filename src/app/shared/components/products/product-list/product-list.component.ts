@@ -18,7 +18,6 @@ import { AddToFavoritesService } from '../../../services/add-to-favorites.servic
     styleUrl: './product-list.component.css',
 })
 export class ProductListComponent implements OnChanges {
-    // TODO: Animated No-products
     @Input() products2: IProductList | null = null;
     @Input() searched: IProductList | null = null;
 
