@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
+
 import { HttpService } from '../../core/services/http.service';
 import { AuthStateService } from '../../core/state/auth-state.service';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { ProductListComponent } from '../../shared/components/products/product-list/product-list.component';
-import { IProductList } from '../../types';
+import { IProduct, IProductList } from '../../types';
 import { ProductSearchComponent } from '../../shared/components/products/product-search/product-search.component';
 
 @Component({
@@ -18,6 +18,7 @@ import { ProductSearchComponent } from '../../shared/components/products/product
 })
 export class HomeComponent implements OnInit, OnDestroy {
     products: IProductList | null = null;
+    searched: IProductList | null = null;
     subscription: Subscription | null = null;
     isLoading = true;
 
@@ -62,6 +63,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     searchHandler(query: string) {
-        console.log(query);
+        const result = this.products?.filter((product: IProduct) => {
+            return product.name.toLowerCase().includes(query.toLowerCase());
+        });
+
+        if (result) {
+            console.log('result');
+
+            this.searched = [...result];
+        } else {
+            console.log('no result');
+
+            this.searched = null;
+        }
     }
 }

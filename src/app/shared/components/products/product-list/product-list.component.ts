@@ -1,4 +1,11 @@
-import { Component, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IProduct, IProductList } from '../../../../types';
 import { AddToFavoritesService } from '../../../services/add-to-favorites.service';
@@ -10,11 +17,21 @@ import { AddToFavoritesService } from '../../../services/add-to-favorites.servic
     templateUrl: './product-list.component.html',
     styleUrl: './product-list.component.css',
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnChanges {
     // TODO: Animated No-products
-    @Input() products: IProductList | null = null;
+    @Input() products2: IProductList | null = null;
+    @Input() searched: IProductList | null = null;
+
+    products: IProductList | null = null;
 
     constructor(private favoritesService: AddToFavoritesService) {}
+    ngOnChanges(): void {
+        if (this.searched) {
+            this.products = this.searched;
+        } else {
+            this.products = this.products2;
+        }
+    }
 
     handleAddToFavoritesButton(event: MouseEvent, product: IProduct) {
         event.stopPropagation();

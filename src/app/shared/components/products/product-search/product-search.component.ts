@@ -14,8 +14,6 @@ export class ProductSearchComponent {
     submitHandler(form: NgForm) {
         const { search_query }: { search_query: string } = form.value;
 
-        if (search_query) {
-            this.searchHandler.emit(search_query);
-        }
+        this.searchHandler.emit(search_query);
     }
 }
