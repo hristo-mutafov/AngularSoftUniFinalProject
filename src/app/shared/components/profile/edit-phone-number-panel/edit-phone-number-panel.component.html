@@ -1,0 +1,22 @@
+<div id="edit_phone_number_panel" class="edit_panel active">
+    <i (click)="closePanel()" class="fas fa-times"></i>
+    <h3 class="heading">Change Phone Number</h3>
+
+    <form #form="ngForm" class="form" (ngSubmit)="editPhoneNumber(form)">
+        @if (formError) {
+            <p class="error_message">{{ formError }}</p>
+        }
+        <div class="field_wrapper">
+            <label for="phoneNumberField">Phone Number:</label>
+            <input
+                name="phoneNumber"
+                id="phoneNumberField"
+                type="text"
+                ngModel
+                required
+            />
+        </div>
+
+        <button id="savePhoneNumber" class="btn">Save</button>
+    </form>
+</div>

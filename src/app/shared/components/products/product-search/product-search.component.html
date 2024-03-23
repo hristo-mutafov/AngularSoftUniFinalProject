@@ -1,0 +1,19 @@
+<div class="form_wrapper">
+    <form
+        #form="ngForm"
+        method="get"
+        class="index_page_form"
+        (ngSubmit)="submitHandler(form)"
+    >
+        <!-- {{ search_form.search_query }} -->
+        <input
+            class="search-input"
+            type="text"
+            name="search_query"
+            maxlength="100"
+            id="id_search_query"
+            ngModel
+        />
+        <button class="submit_button"><i class="fas fa-search"></i></button>
+    </form>
+</div>

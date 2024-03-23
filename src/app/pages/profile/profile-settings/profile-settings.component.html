@@ -1,150 +1,112 @@
-<main id="main">
-    <section class="profile_settings">
-        <div id="change_name_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Change name</h3>
+@if (openedPanels.editNamePanel) {
+    <app-edit-name-panel
+        class="edit_panel active"
+        (hideChangeNamePanel)="hideOpenedPanels()"
+    />
+}
 
-            <form class="form">
-                <p class="error_message">Error</p>
+@if (openedPanels.editEmailPanel) {
+    <app-edit-email-panel
+        class="edit_panel active"
+        (hideChangeNamePanel)="hideOpenedPanels()"
+    />
+}
 
-                <div class="field_wrapper">
-                    <label for="first_name">First Name:</label>
-                    <input name="first_name" id="first_name" type="text" />
-                </div>
+@if (openedPanels.editPasswordPanel) {
+    <app-edit-password-panel
+        class="edit_panel active"
+        (hideChangeNamePanel)="hideOpenedPanels()"
+    />
+}
 
-                <div class="field_wrapper">
-                    <label for="last_name">Last Name:</label>
-                    <input name="last_name" type="text" id="last_name" />
-                </div>
-
-                <button id="saveName" class="btn">Save</button>
-            </form>
-        </div>
-
-        <div id="change_email_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Change Email</h3>
-
-            <form class="form">
-                <p class="error_message"></p>
-
-                <div class="field_wrapper">
-                    <label for="emailInput">New Email:</label>
-                    <input name="email" id="emailInput" type="text" />
-                </div>
-
-                <div class="field_wrapper">
-                    <label for="passwordInput">Password:</label>
-                    <input name="password" id="passwordInput" type="password" />
-                </div>
-
-                <button name="email_form" id="saveEmail" class="btn">
-                    Save
-                </button>
-            </form>
-        </div>
-
-        <div id="change_password_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Change Password</h3>
-
-            <form class="form">
-                <p class="error_message"></p>
-
-                <div class="field_wrapper">
-                    <label for="oldPasswordInput">Old Password:</label>
-                    <input
-                        name="old_password"
-                        id="oldPasswordInput"
-                        type="password"
-                    />
-                </div>
-
-                <div class="field_wrapper">
-                    <label for="newPasswordInput">New Password:</label>
-                    <input
-                        name="new_password"
-                        id="newPasswordInput"
-                        type="password"
-                    />
-                </div>
-
-                <div class="field_wrapper">
-                    <label for="repeatPasswordInput"
-                        >Repeat New Password:</label
+@if (openedPanels.deleteProfilePanel) {
+    <app-delete-profile-panel
+        class="edit_panel active"
+        (hideChangeNamePanel)="hideOpenedPanels()"
+    />
+}
+<section class="profile_settings">
+    <section class="settings">
+        <div class="credentials">
+            <h2 class="heading">Profile Data</h2>
+            <ul role="list">
+                <li class="list_item">
+                    <div class="data">
+                        <i class="fas fa-user"></i>
+                        <div class="field_wrapper">
+                            <p class="field_label">Name:</p>
+                            @if (profile?.firstName && profile?.lastName) {
+                                <p id="name_field" class="field">
+                                    {{ profile?.firstName }}
+                                    {{ profile?.lastName }}
+                                </p>
+                            } @else if (profile?.firstName) {
+                                <p id="name_field" class="field">
+                                    {{ profile?.firstName }}
+                                </p>
+                            } @else {
+                                <p id="name_field" class="field">
+                                    {{ blankFieldMessage }}
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <button
+                        (click)="showEditNamePanel()"
+                        id="edit_name_btn"
+                        class="btn"
                     >
-                    <input
-                        name="repeat_new_password"
-                        id="repeatPasswordInput"
-                        type="password"
-                    />
-                </div>
-
-                <button id="savePassword" class="btn">Save</button>
-            </form>
+                        <i class="far fa-edit"></i> Edit
+                    </button>
+                </li>
+                <li class="list_item">
+                    <div class="data">
+                        <i class="fas fa-envelope"></i>
+                        <div class="field_wrapper">
+                            <p class="field_label">Email:</p>
+                            <span id="email_field" class="field">{{
+                                profile?.email
+                            }}</span>
+                        </div>
+                    </div>
+                    <button
+                        (click)="showEditEmailPanel()"
+                        id="edit_email_btn"
+                        class="btn"
+                    >
+                        <i class="far fa-edit"></i> Edit
+                    </button>
+                </li>
+                <li class="list_item">
+                    <div class="data">
+                        <i class="fas fa-lock"></i>
+                        <div class="field_wrapper">
+                            <p class="field_label">Password:</p>
+                            <p class="field">********</p>
+                        </div>
+                    </div>
+                    <button
+                        (click)="showEditPasswordPanel()"
+                        id="change_password_btn"
+                        class="btn"
+                    >
+                        <i class="far fa-edit"></i> Edit
+                    </button>
+                </li>
+            </ul>
         </div>
-
-        <div id="delete_profile_panel" class="edit_panel">
-            <i class="fas fa-times"></i>
-            <h3 class="heading">Delete Profile</h3>
-            <form method="post">
-                <button id="deleteProfileBtn" class="btn">Delete</button>
-            </form>
+        <div class="profile_delete">
+            <h2 class="heading">Delete Profile</h2>
+            <div class="wrapper">
+                <p class="text">Deletes the profile permanently</p>
+                <button
+                    (click)="showDeleteProfilePanel()"
+                    id="deleteBtn"
+                    class="btn"
+                >
+                    Delete
+                </button>
+            </div>
         </div>
-        <app-profile-sidenav />
-        <section class="settings">
-            <div class="credentials">
-                <h2 class="heading">Profile Data</h2>
-                <ul role="list">
-                    <li class="list_item">
-                        <div class="data">
-                            <i class="fas fa-user"></i>
-                            <div class="field_wrapper">
-                                <p class="field_label">Name:</p>
-                                <!-- {% if first_name and last_name %}
-                                    <p id="name_field" class="field">{{ first_name }} {{ last_name }}</p>
-                                {% else %}
-                                    <p id="name_field" class="field">Not filled</p>
-                                {% endif %} -->
-                            </div>
-                        </div>
-                        <button id="edit_name_btn" class="btn">
-                            <i class="far fa-edit"></i> Edit
-                        </button>
-                    </li>
-                    <li class="list_item">
-                        <div class="data">
-                            <i class="fas fa-envelope"></i>
-                            <div class="field_wrapper">
-                                <p class="field_label">Email:</p>
-                                <span id="email_field" class="field"></span>
-                            </div>
-                        </div>
-                        <button id="edit_email_btn" class="btn">
-                            <i class="far fa-edit"></i> Edit
-                        </button>
-                    </li>
-                    <li class="list_item">
-                        <div class="data">
-                            <i class="fas fa-lock"></i>
-                            <div class="field_wrapper">
-                                <p class="field_label">Password:</p>
-                                <p class="field">********</p>
-                            </div>
-                        </div>
-                        <button id="change_password_btn" class="btn">
-                            <i class="far fa-edit"></i> Edit
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="profile_delete">
-                <h2 class="heading">Delete Profile</h2>
-                <div class="wrapper">
-                    <p class="text">Deletes the profile permanently</p>
-                    <button id="deleteBtn" class="btn">Delete</button>
-                </div>
-            </div>
-        </section>
     </section>
-</main>
+</section>

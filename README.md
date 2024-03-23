@@ -12,6 +12,8 @@
 
 -   `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+### Connect to Rest API
+
 ### Authentication and Authorization
 
 #### Authentication
@@ -32,3 +34,28 @@ Refresh token - local storage
 #### Authorization
 
 Authorization is implemented using three guards. First two (`is-authenticated.guard.ts` and `already-authenticated.guard.ts`) checks if the user is authenticated and the other (`is-staff.guard.ts`) checks if he has a specific role (isStaff role).
+
+### State Management
+
+There are Behavior Subjects used for managing the global state of the user authentication and cart count. They are located in `core/state` folder
+
+### User Types
+
+The application supports Unauthenticated users, Authenticated users and Staff users.
+
+-   Unauthenticated users can scroll through the products and open their details page.
+-   Authenticated users, additionally can add these products to a their cart, and buy them. Also they have the ability to add products in their favorites list, and can configure their profile inside the profile menus.
+-   Staff users can Updated, Create and Delete Products.
+
+### Folder Structure
+
+The Folder structure is common. There is `core`, `pages`, `shared` main folders.
+
+-   `Core` folder contain the core functionalities of the application, and these, which are essential for it. The components, that are used only one one place like layout components are also there.
+-   `Pages` folder contain the main components, structured like the routing system of the application
+-   `Shared` folder, contain the components and files, which are shared within the other components. It also contains the split components that form the main pages, stored in `Pages` folder
+
+### Borrowed work from internet
+
+-   The content of the 400 page is almost entirely taken from internet, just because is interesting and funny.
+-   The .SVG image inside the 500 page is also taken from internet.

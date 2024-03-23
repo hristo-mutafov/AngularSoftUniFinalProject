@@ -1,22 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { catchError, retry, throwError } from 'rxjs';
+
+import { HttpService } from '../../core/services/http.service';
+import { IGetCartResponse } from '../../types';
+import { ERROR_RETRY_TIMES } from '../../shared/constants';
+import { getFutureDate } from '../../shared/utils';
+import { EmptyCartComponent } from '../../shared/components/cart/empty-cart/empty-cart.component';
+import { CartTableComponent } from '../../shared/components/cart/cart-table/cart-table.component';
+import { CartPriceMenuComponent } from '../../shared/components/cart/cart-price-menu/cart-price-menu.component';
 
 @Component({
     selector: 'app-cart',
     standalone: true,
-    imports: [],
+    imports: [EmptyCartComponent, CartTableComponent, CartPriceMenuComponent],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.css',
 })
-export class CartComponent {
-    // TODO: Mock Data:
-    product = {
-        image: 'https://t4.ftcdn.net/jpg/00/53/45/31/360_F_53453175_hVgYVz0WmvOXPd9CNzaUcwcibiGao3CL.jpg',
-        name: 'T-Shirt',
-        brand: 'Nike',
-        price: 22.2,
-        count: 1,
-    };
+export class CartComponent implements OnInit {
+    isLoading = true;
+    cart: IGetCartResponse | null = null;
+    dateAfterFourDays = getFutureDate(4);
 
-    total_price = 22.2;
-    overall_products_price = 22.2;
+    constructor(
+        private http: HttpService,
+        private router: Router,
+    ) {}
+
+    ngOnInit(): void {
+        this.http.getCart().subscribe({
+            next: (cart) => {
+                this.isLoading = false;
+                this.cart = cart;
+            },
+            error: () => this.router.navigate(['server-error']),
+        });
+    }
 }

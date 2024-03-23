@@ -1,6 +1,8 @@
 .header {
     background-color: #1d1d1f;
     width: 100%;
+    position: relative;
+    z-index: 100;
 }
 
 .header .header_wrapper {
@@ -20,16 +22,11 @@
 }
 
 .header .wrapper.mobile {
-    display: none;
     background-color: #1d1d1f;
     flex-direction: column;
     text-align: center;
     gap: 5px;
     padding-bottom: 30px;
-}
-
-.header .wrapper.mobile .list_item:hover {
-    background-color: #2b2b2e;
 }
 
 .header .logo {
@@ -47,6 +44,18 @@
 
 .header .wrapper.mobile .list_item {
     margin: 0px;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px 0;
+}
+/* .header .wrapper.mobile .list_item a {
+    width: 100%;
+    cursor: pointer;
+    color: red;
+} */
+
+.header .wrapper.mobile .list_item:hover {
+    background-color: #2b2b2e;
 }
 
 .header .wrapper .list_item a {

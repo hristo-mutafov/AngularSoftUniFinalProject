@@ -1,1 +1,106 @@
-<p>product-edit works!</p>
+@if (isLoading) {
+    <app-loader class="loader" />
+} @else {
+    <main class="product_page" id="main">
+        <form
+            #form="ngForm"
+            class="product-form"
+            (ngSubmit)="formHandler(form)"
+        >
+            <h1 class="heading">Edit Product</h1>
+            <div class="input-group">
+                <label for="name-input"> Image URL </label>
+                <input
+                    id="name-input"
+                    type="text"
+                    name="image"
+                    [(ngModel)]="product!.image"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <label for="name-input"> Name </label>
+                <input
+                    id="name-input"
+                    type="text"
+                    name="name"
+                    [(ngModel)]="product!.name"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <label for="quantity-input"> Quantity </label>
+                <input
+                    id="quantity-input"
+                    type="text"
+                    name="quantity"
+                    [(ngModel)]="product!.quantity"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <label for="brand-input"> Brand </label>
+                <input
+                    id="brand-input"
+                    type="text"
+                    name="brand"
+                    [(ngModel)]="product!.brand"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <label for="madein-input"> Made in </label>
+                <input
+                    id="madein-input"
+                    type="text"
+                    name="made_in"
+                    [(ngModel)]="product!.made_in"
+                    required
+                />
+            </div>
+            <div class="input-group">
+                <label for="category-input"> Category </label>
+                <select
+                    id="category-input"
+                    name="category"
+                    [(ngModel)]="mappedCategory"
+                    required
+                >
+                    <option value="2">Shorts</option>
+                    <option value="1">T-Shirts</option>
+                    <option value="3">Shoes</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="price-input"> Price </label>
+                <input
+                    id="price-input"
+                    type="text"
+                    name="price"
+                    [(ngModel)]="product!.price"
+                    required
+                    pattern="^\d+(.\d{1,2})?$"
+                />
+            </div>
+            <div class="input-group">
+                <label for="description-input"> Description </label>
+                <textarea
+                    id="description-input"
+                    cols="30"
+                    rows="5"
+                    name="description"
+                    [(ngModel)]="product!.description"
+                    required
+                ></textarea>
+            </div>
+            <p class="error">{{ errorMessage }}</p>
+
+            <button class="button">
+                @if (editLoading) {
+                    <app-loader class="spinner" />
+                }
+                Edit
+            </button>
+        </form>
+    </main>
+}

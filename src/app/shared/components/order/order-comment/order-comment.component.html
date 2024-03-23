@@ -1,0 +1,17 @@
+<div class="method">
+    <div class="section_heading_wrapper">
+        <i class="fas fa-comment"></i>
+        <h2 class="section_heading">Add Comment</h2>
+    </div>
+    <div class="main">
+        <form #form="ngForm" action="" (change)="submitComment(form)">
+            <textarea
+                placeholder="Add Comment Here..."
+                name="additional_comment"
+                id="comment_textarea"
+                rows="4"
+                ngModel
+            ></textarea>
+        </form>
+    </div>
+</div>

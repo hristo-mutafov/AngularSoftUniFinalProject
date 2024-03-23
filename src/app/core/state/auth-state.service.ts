@@ -11,12 +11,12 @@ export class AuthStateService implements OnDestroy {
     auth$ = this.authSubject$$.asObservable();
 
     private _authenticated = false;
-    private _isStaff: boolean | undefined;
+    private _profile: IProfileState | null = null;
     private subscription: Subscription;
 
     constructor() {
         this.subscription = this.auth$.subscribe((auth) => {
-            this._isStaff = auth?.isStaff;
+            this._profile = auth;
             this._authenticated = !!auth;
         });
     }
@@ -33,7 +33,7 @@ export class AuthStateService implements OnDestroy {
         return this._authenticated;
     }
 
-    setProfile(profile: IProfile) {
+    setProfileFromServer(profile: IProfile) {
         this.authSubject$$.next({
             email: profile.email,
             isStaff: profile.is_staff,
@@ -45,14 +45,36 @@ export class AuthStateService implements OnDestroy {
         });
     }
 
+    setProfileFromState(profile: IProfileState) {
+        this.authSubject$$.next(profile);
+    }
+
+    getProfile$() {
+        return this.auth$.pipe(
+            map((state) => {
+                return state;
+            }),
+        );
+    }
+
+    getProfile() {
+        return this._profile;
+    }
+
     setIsStaff(isStaff: boolean) {
         this.authSubject$$.next({ isStaff });
     }
 
-    isStaff() {
-        console.log(this._isStaff);
+    isStaff$() {
+        return this.auth$.pipe(
+            map((state) => {
+                return !!state?.isStaff;
+            }),
+        );
+    }
 
-        return this._isStaff;
+    isStaff() {
+        return this._profile?.isStaff;
     }
 
     authenticate() {

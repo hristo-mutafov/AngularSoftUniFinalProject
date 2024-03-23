@@ -1,0 +1,11 @@
+<div id="delete_profile_panel" class="edit_panel active">
+    <i (click)="closePanel()" class="fas fa-times"></i>
+    <h3 class="heading">Delete Profile</h3>
+
+    @if (formError) {
+        <p class="error_message">{{ formError }}</p>
+    }
+    <form #form="ngForm" method="post" (ngSubmit)="deleteProfile()">
+        <button id="deleteProfileBtn" class="btn">Delete</button>
+    </form>
+</div>

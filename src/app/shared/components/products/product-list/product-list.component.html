@@ -1,0 +1,34 @@
+<section class="products_wrapper">
+    @if (products?.length) {
+        @for (product of products; track product.id) {
+            <div [routerLink]="['/product/', product.id]" class="product">
+                <img src="{{ product.image }}" alt="" class="image" />
+                <div class="data_section">
+                    <div class="text_container">
+                        <h3 class="heading">{{ product.name }}</h3>
+                        <p class="price">{{ product.price }}</p>
+                    </div>
+                    @if (product?.in_favorites) {
+                        <i
+                            (click)="
+                                handleAddToFavoritesButton($event, product)
+                            "
+                            id="icon"
+                            class="fas fa-heart"
+                        ></i>
+                    } @else {
+                        <i
+                            (click)="
+                                handleAddToFavoritesButton($event, product)
+                            "
+                            id="icon"
+                            class="far fa-heart"
+                        ></i>
+                    }
+                </div>
+            </div>
+        }
+    } @else {
+        <h1 class="emptyPageMassage">There is no products yet!</h1>
+    }
+</section>

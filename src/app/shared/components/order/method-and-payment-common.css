@@ -1,0 +1,79 @@
+.method {
+    border: 1px solid lightgrey;
+    box-shadow:
+        rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.method .main {
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.method .main .method_form,
+.method .main #id_delivery_method {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 1px solid lightgrey;
+}
+
+.method .method_form .element {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.method .method_form .delivery_label {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.method .data .heading {
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.method .data .field_wrapper {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.method .section_heading_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 6px;
+    background-color: rgb(229, 225, 225);
+    color: #1d1d1f;
+}
+
+.method .section_heading_wrapper i {
+    font-size: 20px;
+}
+
+.wrong {
+    border-color: red;
+}
+
+.colored {
+    color: #0071e3;
+}
+
+@media screen and (max-width: 800px) {
+    .method .main {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(1, 1fr);
+        gap: 20px;
+    }
+
+    .method .method_form {
+        border-right: none;
+    }
+}

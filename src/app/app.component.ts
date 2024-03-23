@@ -7,11 +7,12 @@ import { HttpService } from './core/services/http.service';
 import { TokenService } from './core/services/token.service';
 import { AuthStateService } from './core/state/auth-state.service';
 import { isTokenExpired } from './shared/validators/jwt.validator';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, HeaderComponent, FooterComponent],
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, LoaderComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
 })
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
         } else if (!tokenExpired) {
             this.authState.authenticate();
             this.getProfile();
+            this.getCart();
         } else {
             this.tokenService.removeTokens();
             this.loading = false;
@@ -53,6 +55,7 @@ export class AppComponent implements OnInit {
             next: () => {
                 this.authState.authenticate();
                 this.getProfile();
+                this.getCart();
             },
             error: () => (this.loading = false),
         });
@@ -61,10 +64,14 @@ export class AppComponent implements OnInit {
     private getProfile(): void {
         this.http.getProfile().subscribe({
             next: (profile) => {
-                this.authState.setProfile(profile);
+                this.authState.setProfileFromServer(profile);
                 this.loading = false;
             },
             error: () => (this.loading = false),
         });
+    }
+
+    private getCart() {
+        this.http.getCart().subscribe();
     }
 }

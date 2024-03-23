@@ -1,0 +1,114 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th class="mobile">Single price</th>
+            <th class="mobile">Count</th>
+            <th class="mobile">Price</th>
+            <th class="mobile"></th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        @if (isLoading) {
+            <tr>
+                <td colspan="5">
+                    <app-loader class="loader" />
+                </td>
+            </tr>
+        } @else {
+            @for (product of cart; track product.product.id) {
+                <tr>
+                    <td class="image_and_desc">
+                        <img
+                            id="product_image"
+                            src="{{ product.product.image }}"
+                            alt="product"
+                        />
+                        <div class="wrapper">
+                            <p id="product_name" class="product_name">
+                                {{ product.product.name }}
+                            </p>
+                            <div class="brand_wrapper">
+                                <p class="brand_label">Brand:</p>
+                                <p id="product_brand" class="brand">
+                                    {{ product.product.brand }}
+                                </p>
+                            </div>
+                            <p class="delivery_date">
+                                Delivery on
+                                <span
+                                    id="product_delivery_date"
+                                    class="colored"
+                                    >{{ dateAfterFourDays }}</span
+                                >
+                            </p>
+                        </div>
+                    </td>
+                    <td id="single_price_sec">
+                        <span id="priceDesign" class="price">
+                            <span id="bigPrice" class="whole">{{
+                                product.product.price | wholePrice
+                            }}</span>
+                            <span id="smallPrice" class="cents"
+                                >{{ product.product.price | decimalPrice }}
+                            </span>
+                            <span class="currency"> lv. </span>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="count_wrapper">
+                            <button
+                                (click)="
+                                    decreaseProductCount(product.product.id)
+                                "
+                                id="decrease_btn"
+                                class="decrease_btn"
+                            >
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <p class="product_count">
+                                {{ product.count }}
+                            </p>
+                            <button
+                                (click)="
+                                    increaseProductCount(product.product.id)
+                                "
+                                id="increase_btn"
+                                class="increase_btn"
+                            >
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td id="total_price_sec">
+                        <span id="priceDesign" class="price">
+                            <span id="bigPrice" class="whole">{{
+                                calculateTotalPricePerProduct(
+                                    product.product.price,
+                                    product.count
+                                ) | wholePrice
+                            }}</span>
+                            <span id="smallPrice" class="cents"
+                                >{{
+                                    calculateTotalPricePerProduct(
+                                        product.product.price,
+                                        product.count
+                                    ) | decimalPrice
+                                }}
+                            </span>
+                            <span class="currency"> lv. </span>
+                        </span>
+                    </td>
+                    <td class="remove_item">
+                        <button
+                            (click)="removeProduct(product.product.id)"
+                            id="remove_item_btn"
+                        >
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

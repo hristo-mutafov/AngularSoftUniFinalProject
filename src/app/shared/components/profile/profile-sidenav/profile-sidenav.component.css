@@ -1,0 +1,38 @@
+.shorthand_nav {
+    align-self: start;
+    justify-self: center;
+    width: 100%;
+}
+
+.shorthand_nav .profile_nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.shorthand_nav .profile_nav .list_item {
+    padding: 10px 15px;
+    border-bottom: 1px solid lightgray;
+    color: #1d1d1f;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.shorthand_nav .profile_nav .list_item a {
+    text-decoration: none;
+    color: #1d1d1f;
+}
+
+.shorthand_nav .profile_nav .list_item a:hover {
+    color: #0071e3;
+}
+
+.profile_nav .active {
+    background-color: rgba(0, 113, 227, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+    .shorthand_nav {
+        display: none;
+    }
+}

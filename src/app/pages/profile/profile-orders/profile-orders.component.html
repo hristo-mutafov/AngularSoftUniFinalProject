@@ -1,13 +1,14 @@
-<main class="orders_page" id="main">
-    <section class="profile_settings">
-        <app-profile-sidenav />
-
-        <section class="settings">
-            <div class="credentials">
-                <h2 class="heading">My Orders</h2>
-                <!-- {% if orders %} -->
-                <ul id="order_wrapper" role="list">
-                    <!-- {% for order in orders %} -->
+<section class="settings">
+    <div class="credentials">
+        <h2 class="heading">My Orders</h2>
+        @if (error) {
+            <h1 id="empty_order_page" class="empty_order_page">
+                Try again later
+            </h1>
+        }
+        @if (orderList && !error) {
+            <ul id="order_wrapper" role="list">
+                @for (order of orderList; track order.order_number) {
                     <li id="listItem" class="list_item">
                         <div class="order_data">
                             <div class="field_wrapper">
@@ -16,7 +17,7 @@
                                     <p>Order Number</p>
                                 </div>
                                 <div class="field_data" id="order_number">
-                                    {{ order.order_number }}...
+                                    {{ order?.order_number }}...
                                 </div>
                             </div>
                             <div class="field_wrapper">
@@ -39,17 +40,24 @@
                             </div>
                         </div>
                         <a
-                            ><button id="viewBtn" class="btn">
+                            ><button
+                                [routerLink]="[
+                                    '/profile/order/',
+                                    order.order_number
+                                ]"
+                                id="viewBtn"
+                                class="btn"
+                            >
                                 <i class="fas fa-eye"></i> View Order
                             </button></a
                         >
                     </li>
-                    <!-- {% endfor %} -->
-                </ul>
-                <!-- {% else %}
-                <h1 id="empty_order_page" class="empty_order_page">No Orders Yet</h1>
-            {% endif %} -->
-            </div>
-        </section>
-    </section>
-</main>
+                }
+            </ul>
+        } @else {
+            <h1 id="empty_order_page" class="empty_order_page">
+                No Orders Yet
+            </h1>
+        }
+    </div>
+</section>
