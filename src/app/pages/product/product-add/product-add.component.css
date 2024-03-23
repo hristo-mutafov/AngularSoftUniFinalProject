@@ -53,6 +53,10 @@
     text-decoration: none;
     border: 1px solid #1d1d1f;
     cursor: pointer;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
 }
 
 .product_page .product-form .button:hover {
@@ -86,6 +90,17 @@
     padding-left: 35px;
     line-height: 30px;
     cursor: pointer;
+}
+
+.error {
+    color: red;
+    margin-bottom: -10px;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    display: block;
 }
 
 @media screen and (max-width: 740px) {

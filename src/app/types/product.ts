@@ -24,3 +24,16 @@ export interface IProductDetail {
 export type IProductList = IProduct[];
 
 export type IFavoritesList = [{ products: IProduct[] }];
+
+export interface IProductCreate {
+    key: string;
+    name: string;
+    description: string;
+    quantity: number;
+    made_in: string;
+    price: number;
+    category: number;
+    brand: string;
+    extension: string;
+    image: string;
+}

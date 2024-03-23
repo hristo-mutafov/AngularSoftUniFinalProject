@@ -8,6 +8,7 @@ import {
     IGetCartResponse,
     IOrderDetail,
     IOrderList,
+    IProductCreate,
     IProductDetail,
     IProductList,
     IProfile,
@@ -161,5 +162,11 @@ export class HttpService {
 
     getOrderDetail(uuid: string) {
         return this.http.get<IOrderDetail>(`/api/orders/${uuid}`);
+    }
+
+    createProduct(data: IProductCreate) {
+        console.log(data);
+
+        return this.http.post<ISuccessWithMessage>('/api/products', data);
     }
 }

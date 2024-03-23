@@ -10,3 +10,5 @@ export const FIELDS_ARE_REQUIRED = 'All fields are required!';
 export const PASSWORD_NOT_MATCH = 'Passwords do not match!';
 export const BLANK_FIELD_MESSAGE = 'Field not filled';
 export const ORDER_400_ERROR = 'Missing fields!';
+export const NOT_CORRECT_FILLED_FILEDS =
+    'The fields may not be filled correctly!';
