@@ -175,6 +175,22 @@
     margin: 50px auto;
 }
 
+.delete-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 18px;
+    background-color: rgba(155, 0, 0, 0.8);
+    color: #f5f5f7;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: rgba(155, 0, 0, 1);
+}
+
 @media screen and (max-width: 982px) {
     .product_page > .wrapper:first-child {
         display: grid;

@@ -10,7 +10,17 @@
                 class="image"
             />
             <section class="info_section">
-                <h1 id="productName" class="heading"></h1>
+                <h1 id="productName" class="heading">
+                    {{ product?.name }}
+                    @if (isStaff) {
+                        <button
+                            (click)="deleteHandler(product?.id)"
+                            class="delete-btn"
+                        >
+                            Delete
+                        </button>
+                    }
+                </h1>
                 <div class="additional">
                     <p class="brant label">Brand:</p>
                     <p id="productBrand" class="brand">{{ product?.brand }}</p>

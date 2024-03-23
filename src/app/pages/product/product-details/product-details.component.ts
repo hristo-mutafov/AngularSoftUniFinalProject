@@ -24,6 +24,7 @@ export class ProductDetailsComponent {
     product: IProductDetail | null = null;
     date_after_two_days = getFutureDate(2);
     date_after_four_days = getFutureDate(4);
+    isStaff: boolean | undefined = undefined;
 
     constructor(
         private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class ProductDetailsComponent {
         private authState: AuthStateService,
     ) {
         this.product_id = Number(this.route.snapshot.params['id']);
+        this.isStaff = authState.isStaff();
 
         this.http.getProduct(this.product_id).subscribe({
             next: (product) => {
@@ -63,5 +65,18 @@ export class ProductDetailsComponent {
                 this.router.navigate(['server-error']);
             },
         });
+    }
+
+    deleteHandler(id: number | undefined) {
+        if (id) {
+            this.http.deleteProduct(id).subscribe({
+                next: () => {
+                    this.router.navigate(['home']);
+                },
+                error: () => {
+                    this.router.navigate(['server-error']);
+                },
+            });
+        }
     }
 }

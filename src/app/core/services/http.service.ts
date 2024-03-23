@@ -165,8 +165,10 @@ export class HttpService {
     }
 
     createProduct(data: IProductCreate) {
-        console.log(data);
-
         return this.http.post<ISuccessWithMessage>('/api/products', data);
+    }
+
+    deleteProduct(id: number) {
+        return this.http.delete(`/api/product/${id}`);
     }
 }
