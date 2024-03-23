@@ -171,4 +171,8 @@ export class HttpService {
     deleteProduct(id: number) {
         return this.http.delete(`/api/product/${id}`);
     }
+
+    editProduct(id: number, data: Partial<IProductCreate>) {
+        return this.http.patch(`/api/product/${id}`, data);
+    }
 }

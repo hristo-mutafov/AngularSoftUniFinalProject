@@ -15,7 +15,7 @@ export const routes: Routes = [
                 component: ProductAddComponent,
             },
             {
-                path: 'edit',
+                path: 'edit/:id',
                 canActivate: [isStaffGuard],
                 component: ProductEditComponent,
             },

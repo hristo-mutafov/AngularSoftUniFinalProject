@@ -21,3 +21,13 @@ export const calculateTotalPrice = (cart: IGetCartResponse | null) => {
     });
     return sum.toFixed(2);
 };
+
+export const mapCategory = (value: 'T-Shirt' | 'Shorts' | 'Shoes'): string => {
+    const mapper = {
+        'T-Shirt': '1',
+        Shorts: '2',
+        Shoes: '3',
+    };
+
+    return mapper[value];
+};

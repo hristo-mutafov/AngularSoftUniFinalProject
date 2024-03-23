@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { HttpService } from '../../../core/services/http.service';
 import { AuthStateService } from '../../../core/state/auth-state.service';
@@ -13,7 +13,12 @@ import { IProductDetail } from '../../../types';
 @Component({
     selector: 'app-product-details',
     standalone: true,
-    imports: [LoaderComponent, GetDecimalPartPipe, GetWholePricePipe],
+    imports: [
+        LoaderComponent,
+        GetDecimalPartPipe,
+        GetWholePricePipe,
+        RouterLink,
+    ],
     templateUrl: './product-details.component.html',
     styleUrl: './product-details.component.css',
 })

@@ -16,15 +16,15 @@ import { Router } from '@angular/router';
     standalone: true,
     imports: [FormsModule, LoaderComponent],
     templateUrl: './product-add.component.html',
-    styleUrl: './product-add.component.css',
+    styleUrl: '../shared-prodcut-styles.css',
 })
 export class ProductAddComponent {
-    //TODO: Extract the same buttons if it is possible
     selectedFile: File | null = null;
     encodedFile: string | null = null;
     fileExtension: string | null = null;
     errorMessage: string | null = null;
     isLoading = false;
+    name = 'name';
 
     constructor(
         private http: HttpService,

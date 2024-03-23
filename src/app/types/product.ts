@@ -17,7 +17,7 @@ export interface IProductDetail {
     made_in: string;
     price: string;
     added_on: string;
-    category: string;
+    category: 'T-Shirt' | 'Shorts' | 'Shoes';
     in_favorites?: boolean;
 }
 
