@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { IProduct, IProductList } from '../../../types';
 import { RouterLink } from '@angular/router';
-import { AddToFavoritesService } from '../../services/add-to-favorites.service';
+import { IProduct, IProductList } from '../../../../types';
+import { AddToFavoritesService } from '../../../services/add-to-favorites.service';
 
 @Component({
     selector: 'app-product-list',

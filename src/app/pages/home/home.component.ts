@@ -1,17 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ProductListComponent } from '../../shared/components/product-list/product-list.component';
-import { HttpService } from '../../core/services/http.service';
-import { IProductList } from '../../types';
 import { Subscription } from 'rxjs';
+import { HttpService } from '../../core/services/http.service';
 import { AuthStateService } from '../../core/state/auth-state.service';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { ProductListComponent } from '../../shared/components/products/product-list/product-list.component';
+import { IProductList } from '../../types';
+import { ProductSearchComponent } from '../../shared/components/products/product-search/product-search.component';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ProductListComponent, LoaderComponent],
+    imports: [ProductListComponent, LoaderComponent, ProductSearchComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
 })
@@ -58,5 +59,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription?.unsubscribe();
+    }
+
+    searchHandler(query: string) {
+        console.log(query);
     }
 }

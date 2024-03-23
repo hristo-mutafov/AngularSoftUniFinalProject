@@ -1,17 +1,5 @@
 <main class="index_page" id="main">
-    <div class="form_wrapper">
-        <form method="get" class="index_page_form">
-            <!-- {{ search_form.search_query }} -->
-            <input
-                class="search-input"
-                type="text"
-                name="search_query"
-                maxlength="100"
-                id="id_search_query"
-            />
-            <button class="submit_button"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
+    <app-product-search (searchHandler)="searchHandler($event)" />
     @if (isLoading) {
         <app-loader class="loader" />
     } @else {
